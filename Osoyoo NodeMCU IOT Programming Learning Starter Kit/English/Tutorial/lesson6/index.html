@@ -1,0 +1,163 @@
+﻿<html>
+<head>
+<title>Nodemcu Lesson 6</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+ <p style="text-align: left;">
+    <span style="font-size: 48px;"><img src="..\..\AboutThisKit\osoyoo_logo.jpg" title="" alt="osyoo logo.jpg"/></span>
+</p>
+<p href ="www.osoyoo.com" align="right" class="TOC" size=="50"><b>www.osoyoo.com</b></p>
+<hr />
+<body>
+<a href="../index.html">Back to NodeMCU Tutoial Index Page</a>
+<hr >
+<h1>Lesson 6 --- MQTT Basic Example</h1>
+<video width="920" height="720" controls>
+  <source src="..\..\videos\Lesson_6_MQTT_Basic_Example.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ol>
+ 	<li><strong><a href="#1">Introduction</a></strong></li>
+ 	<li><strong><a href="#2">Preparation</a></strong></li>
+ 	<li><strong><a href="#3">Library Installation</a></strong></li>
+ 	<li><strong><a href="#4">MQTT Client Installation</a></strong></li>
+ 	<li><strong><a href="#5">Upload sketch</a></strong></li>
+ 	<li><strong><a href="#6">Configration of MQTT Client(MQTTBox)</a></strong></li>
+ 	<li><strong><a href="#7">Program Running Result</a></strong></li>
+</ol>
+<h3 id="1">Introduction</h3>
+This lesson will show the basic MQTT protocol usage on the NodeMCU board.We use the <a href="http://workswithweb.com/mqttbox.html" target="_blank" rel="noopener noreferrer">MQTTBox</a> as the MQTT client here, and we will use the NodeMCU to complete following  operations:
+<ul>
+ 	<li>Publish "hello world" to the topic "outTopic" every two seconds.</li>
+ 	<li>Subscribe to the topic "inTopic", print out any received messages.</li>
+ 	<li>It assumes the received payloads are strings not binaries.</li>
+ 	<li>If the subscribed message is "1", light the onboards LED.Turn off the onboard LED if the message to subscribe is "0".</li>
+</ul>
+It will reconnect to the server if the connection is lost using a blocking reconnect function. See the 'mqtt_reconnect_nonblocking' example for how to achieve the same result without blocking the main loop.
+<h3 id="2">Preparation:</h3>
+<ul>
+ 	<li><a href="http://osoyoo.com/2017/05/03/nodemcu/" target="_blank" rel="noopener noreferrer">Osoyoo NodeMCU</a> x1</li>
+ 	<li><a href="http://osoyoo.com/2017/05/04/usb-cable-amicrob-0-5m/" target="_blank" rel="noopener noreferrer">USB Cable</a> x1</li>
+ 	<li>PC x1</li>
+ 	<li>Arduino IDE(Versin 1.6.4+)</li>
+</ul>
+Connect the NodeMCU to PC via USB cable.
+<h3 id="3">Library Installation:</h3>
+We need install MQTT endpoint library(PubSubClient) to communicate with MQTT broker,  please download the library from following link:
+<br/>
+<a href="http://osoyoo.com/wp-content/uploads/samplecode/pubsubclient.zip">http://osoyoo.com/wp-content/uploads/samplecode/pubsubclient.zip</a>
+<br/>
+Unzip above file, move the unzipped folder to Arduino IDE library folder.
+<br/>
+<a href=".\image\1.jpg"><img class="alignnone wp-image-5469" src=".\image\1.jpg" alt="install lib" width="519" height="296" /></a>
+<br/>
+Open the Arduino IED,you can find the "pubsubclient" on the "Examples" column:
+<br/>
+<a href=".\image\2.jpg"><img class="alignnone wp-image-5476" src=".\image\2.jpg" alt="example_pubsubclient" width="321" height="442" /></a>
+<br/>
+<h3 id="4">MQTT Client Installation:</h3>
+In these lessons,we will use the MQTTBox as the MQTT client.(<a href="https://github.com/mqtt/mqtt.github.io/wiki/brokers" target="_blank" rel="noopener noreferrer">You can also use another client </a>)
+<ul>
+ 	<li id="install_on_linux"><a href="http://workswithweb.com/html/mqttbox/installing_apps.html#install_on_linux" target="_blank" rel="noopener noreferrer"><strong>Installing on Linux</strong></a></li>
+ 	<li><a href="http://workswithweb.com/html/mqttbox/installing_apps.html#install_on_mac" target="_blank" rel="noopener noreferrer"><strong>Installing on Mac</strong></a></li>
+ 	<li><a href="http://workswithweb.com/html/mqttbox/installing_apps.html#install_on_windows" target="_blank" rel="noopener noreferrer"><strong>Installing on Windows</strong></a></li>
+ 	<li><strong><a href="http://workswithweb.com/mqttbox/app/#/mqttclientslist" target="_blank" rel="noopener noreferrer">Use the WEB APP</a></strong></li>
+</ul>
+You will see this page after installation completed:
+<br/>
+<a href=".\image\3.jpg"><img class="alignnone wp-image-5477" src=".\image\3.jpg" alt="MQTTBOX" width="462" height="308" /></a>
+<br/>
+<h3 id="5">Upload sketch</h3>
+If you completed all above operations,open Arduino IDE--&gt;File--&gt;Example--&gt;pubsubclient--&gt;<a href="http://www.osoyoo.com/driver/mqtt_esp8266.ino" target="_blank" rel="noopener noreferrer">mqtt esp8266</a>,you will get below code:
+<br/>
+<br/>
+<a href=".\image\4.jpg"><img class="alignnone size-full wp-image-5486" src=".\image\4.jpg" alt="upload sketch" width="485" height="593" /></a>
+<br/>
+<strong>Edit the code to fit your own WiFi and MQTT settings as following operations:</strong>
+<br/>
+<strong>1)Hotspot Configration:</strong>
+<blockquote><span style="color: #808000;"><em>const char* ssid = "your_hotspot_ssid";</em></span>
+<br/>
+<span style="color: #808000;"><em>const char* password = "your_hotspot_password";</em></span></blockquote>
+Find above code line,put your own ssid and password on there.
+<br/>
+<strong>2)MQTT  Server  Address Setting</strong>
+<blockquote><span style="color: #808000;"><em>const char* mqtt_server = "broker.mqtt-dashboard.com";</em></span></blockquote>
+You can use your own MQTT broker URL or IP address to set above mqtt_server value. You can also use some famous free MQTT server to test the project such as <em> "broker.mqtt-dashboard.com",  "iot.eclipse.org" etc.</em>
+<br/>
+<strong>3)MQTT Client Settings</strong>
+<br/>
+If your MQTT broker require clientID,username and password authentication,you need to change
+<blockquote><span style="color: #808000;"><em>if (client.connect(clientId.c_str()))</em></span></blockquote>
+to
+<blockquote><span style="color: #808000;"><em>if (client.connect(clientId,userName,passWord)) //put your clientId/userName/passWord here</em></span></blockquote>
+If not,just keep them as default.
+<br/>
+After do that,choose the coresponding <strong>board type</strong> and <strong>port type</strong> as below,then upload the sketch to the NodeMCU.
+<br/>
+<a href=".\image\5.jpg"><img class="alignnone size-full wp-image-5487" src=".\image\5.jpg" alt="board port settings" width="486" height="593" /></a>
+<br/>
+<h3 id="6">Configration of MQTT Client (MQTTBOX)</h3>
+In this step,we will show how to create an MQTT client on the MQTTBox.
+<br/>
+Open your MQTTBox and click the blue button to add a new MQTT client.
+<br/>
+<a href=".\image\6.jpg"><img class="alignnone size-full wp-image-5494" src=".\image\6.jpg" alt="create mqtt client" width="692" height="460" /></a>
+<br/>
+Then you will see:
+<br/>
+<a href=".\image\7.jpg"><img class="alignnone wp-image-5495" src=".\image\7.jpg" alt="MQTTBOX2" width="968" height="413" /></a>
+<br/>
+Config the <strong>MQTT CLIENT SETTINGS </strong>as below:
+<ul>
+ 	<li>MQTT Client Name ---- Choose any name you like</li>
+ 	<li>Protocol ---- Choose "mqtt/tcp"</li>
+ 	<li>Host --- Type your "mqtt_server" in this column,make sure it is same as your sketch.(We use "<em>broker.mqtt-dashboard.com" here</em>)</li>
+ 	<li>Keep other settings as default</li>
+</ul>
+Click to save your changes.
+<br/>
+<a href=".\image\8.jpg"><img class="alignnone wp-image-5496" src=".\image\8.jpg" alt="boxsettings" width="970" height="420" /></a>
+<br/>
+Next, you will automatically enter the new page.If all above configration is correct,the <strong>"Not Connected</strong>" will change to "<strong>Connected</strong>" ,your MQTT client name and Host name will be displayed at the top of this page.
+<br/>
+<a href=".\image\9.jpg"><img class="alignnone wp-image-5497" src=".\image\9.jpg" alt="pub sub" width="739" height="596" /></a>
+<br/>
+<strong>Topic setting:</strong>
+
+Make sure your<strong> MQTT client publish topic</strong> is same as your <strong>Arduino sketch subscribe topic（inTopic here）</strong>.
+
+Make sure your <strong>MQTT client</strong><strong> subscribe topic</strong> is same as your<strong> Arduino sketch publish topic（outTopic here）</strong>.
+<br/>
+<a href=".\image\10.jpg"><img class="alignnone wp-image-5501 " src=".\image\10.jpg" alt="" width="751" height="606" /></a>
+<br/>
+Sketch side:
+<br/>
+<a href=".\image\11.jpg"><img class="alignnone wp-image-5740" src=".\image\11.jpg" alt="" width="496" height="504" /></a>
+<br/>
+<a href=".\image\12.jpg"><img class="alignnone wp-image-5741" src=".\image\12.jpg" alt="" width="494" height="315" /></a>
+<br/>
+<h3 id="7">Program Running Result:</h3>
+Onece the upload done,if the wifi hotspot name and password setting is ok, and MQTT broker is connected, open the Serial Monitor,you will see following result:
+<br/>
+<a href=".\image\13.jpg"><img class="alignnone wp-image-5506" src=".\image\13.jpg" alt="serial result" width="700" height="440" /></a>
+<br/>
+You can see the publish message "hello world" on the serial monitor.Then open the MQTT client and publish payload "1" to the MQTT broker, this NodeMCU will recevie this message via MQTT protocol,and the LED will be lit.
+<br/>
+<a href=".\image\14.jpg"><img class="alignnone wp-image-5503" src=".\image\14.jpg" alt="IMG_20170511_175505" width="429" height="571" /></a>
+<br/>
+Publish payload "0" to the MQTT broker,the NodeMCU LED will be turned off.
+<br/>
+<a href=".\image\15.jpg"><img class="alignnone wp-image-5505" src=".\image\15.jpg" alt="IMG_20170511_175535" width="429" height="573" /></a>
+<br/>
+As shown in the right figure below,once click the Subscribe button of  this subscribe topic,this topic will keep subscribe to the messages that published by this NodeMCU.
+<br/>
+<a href=".\image\16.jpg"><img class="alignnone size-full wp-image-5500" src=".\image\16.jpg" alt="box pubsub" width="898" height="718" /></a>
+<br/>
+<br/>
+<br/>
+<br/>
+
+<h2> <a href="../lesson5/index.html"><img class="alignnone wp-image-6442 size-full" src=".\image\17.jpg" alt="" width="156" height="41" /></a>                  <a href="../index.html"><img class="alignnone wp-image-6443 size-full" src=".\image\18.jpg" alt="" width="236" height="39" /></a>                  <a href="../lesson7/index.html"><img class="alignnone size-full wp-image-6445" src=".\image\19.jpg" alt="" width="156" height="41" /></a></h2></html>

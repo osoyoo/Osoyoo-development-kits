@@ -1,0 +1,102 @@
+﻿<head>
+<title>NodeMCU Lesson 1</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+ <p style="text-align: left;">
+    <span style="font-size: 48px;"><img src="..\..\AboutThisKit\osoyoo_logo.jpg" title="" alt="osyoo logo.jpg"/></span>
+</p>
+<p align="right" class="TOC" size=="50"><b>www.osoyoo.com</b></p>
+<hr />
+<body>
+<a href="../index.html">Back to NodeMCU Tutoial Index Page</a>
+<hr >
+<h1>Lesson 1 -- Install the ESP8266 Board Package and the Serial Port Driver</h1>
+<video width="920" height="720" controls>
+  <source src="..\..\videos\Lesson_1_Install_the_ESP8266_Board_Package_and_the_Serial_Port_Driver.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ul>
+ 	<li><strong><a href="#1">Instruction</a></strong></li>
+ 	<li><strong><a href="#2">Connection</a></strong></li>
+ 	<li><strong><a href="#3">Install the COM/Serial port driver</a></strong></li>
+ 	<li><strong><a href="#4">Install the Arduino IDE</a></strong></li>
+ 	<li><strong><a href="#5">Install the ESP8266 Board Package</a></strong></li>
+ 	<li><strong><a href="#6">Setup ESP8266 Support</a></strong></li>
+</ul>
+<h2 id="1">Instruction</h2>
+<strong>The Osoyoo NodeMCU</strong> comes pre-programmed with Lua interpretter, but you don't have to use it! Instead, you can use the Arduino IDE which may be a great starting point for Arduino lovers to familiarize themselves with the technologies surrounding the IoT.Note<span style="color: #000000;"> that when you use the NodeMCU board with the Arduino IDE ,it<strong> </strong>will <span style="color: #ff6600;">write directly to the firmware</span>, erasing the NodeMCU firmware.So if you want to back to Lua SDK,use the "flasher" to<span style="color: #ff6600;"> re-install the firmware</span>.</span>
+
+The NodeMCU programming can be as easy as in Arduino,the main difference is the distribution of pins in the nodemcu board.Following below operations and enjoy your first NodeMCU &amp; Arduino IDE travel!
+<h3 id="2">1.Connect your NodeMCU to the Computer</h3>
+Use the USB cable to connect your NodeMCU to the computer,you will see the  blue onboard LED flicker when powered up, but they will not stay lit.
+<h3 id="3">2.Install the COM/Serial port driver</h3>
+In order to upload code to the ESP8266 and use the serial console, connect any data-capable micro USB cable to ESP8266 IOT Board and the other side to your computer's USB port.
+<br/>
+The new version NodeMCUv1.0 comes with the CP2102 serial chip,you can download and install <a href="http://www.silabs.com/products/development-tools/software/usb-to-uart-bridge-vcp-drivers" target="_blank" rel="noopener noreferrer">the driver here</a>.
+<br/>
+The NodeMCUv0.9 comes with the CH340 serial chip,you can download and install <a href="https://github.com/nodemcu/nodemcu-devkit/tree/master/Drivers" target="_blank" rel="noopener noreferrer">the driver here</a>.
+<br/>
+<h3 id="4">3.Install the Arduino IDE 1.6.4 or greater</h3>
+<a href="https://www.arduino.cc/en/Main/Software" target="_blank" rel="noopener noreferrer">Download Arduino IDE from Arduino.cc </a>(1.6.4 or greater) - don't use 1.6.2! You can use your existing IDE if you have already installed it.
+
+<a href="https://github.com/esp8266/Arduino">You can also try downloading the ready-to-go package from the ESP8266-Arduino project</a>, if the proxy is giving you problems
+<h3 id="5">4.Install the ESP8266 Board Package</h3>
+Enter <a href="http://arduino.esp8266.com/stable/package_esp8266com_index.json" target="_blank" rel="noopener noreferrer"><code>http://arduino.esp8266.com/stable/package_esp8266com_index.json</code></a> into Additional Board Manager URLs field in the Arduino v1.6.4+ preferences (Open Arduino IDE–&gt;File–&gt;Perferences–&gt;Settings).
+<br/>
+<br/>
+<a href=".\image\1.jpg"><img class="alignnone size-full wp-image-5033" src=".\image\1.jpg" alt="reference" width="481" height="580" /></a>
+<br/>
+<br/>
+Enter the link and click "OK" to save your changes.
+<br/>
+<br/>
+<a href=".\image\2.jpg"><img class="alignnone wp-image-5034" src=".\image\2.jpg" alt="save link" width="479" height="423" /></a>
+<br/>
+<br/>
+Next, use the Board Manager to install the ESP8266 package
+<br/>
+<br/>
+<a href=".\image\3.jpg"3><img class="alignnone wp-image-5035" src=".\image\3.jpg" alt="board manager" width="476" height="495" /></a>
+<br/>
+<br/>
+Enter the Boards Manager and find the board type as below:
+<br/>
+<br/>
+<a href=".\image\4.jpg"><img class="alignnone wp-image-5036" src=".\image\4.jpg" alt="install in the board manager" width="627" height="353" /></a>
+<br/>
+<br/>
+Scroll the Broads Manager screen down to the bottom, you will see  A module called <span style="color: #ff6600;">“esp8266 by esp8266 Community”</span> (see following picture), select the latest version and click "<span style="color: #ff6600;">Install</span>".
+<br/>
+<br/>
+<a href=".\image\5.jpg"><img class="alignnone wp-image-5037" src=".\image\5.jpg" alt="installed" width="660" height="372" /></a>
+<br/>
+<br/>
+The ESP8266 package has benn installed successfully.
+
+Note: You'd better close the Arduino IDE and restart it again.
+<h3 id="6">5.Setup ESP8266 Support</h3>
+When you've restarted, select <strong>NodeMCU</strong> <strong>0.9</strong> (or NodeMCU 1.0<strong>)</strong> from the Tools-&gt;Board dropdown
+<br/>
+<br/>
+<a href=".\image\6.jpg"><img class="alignnone wp-image-5038" src=".\image\6.jpg" alt="board types" width="532" height="575" /></a>
+<br/>
+<br/>
+Config the <span style="color: #ff6600;">Board</span> menu and choose the right <span style="color: #ff6600;">Port</span> for your device.
+<ul>
+ 	<li>CPU Frequency：80MHz,</li>
+ 	<li>Flash Size：4M（3M SPIFFS）,</li>
+ 	<li>Upload Speed：115200</li>
+</ul>
+<a href=".\image\7.jpg"><img class="alignnone size-full wp-image-5039" src=".\image\7.jpg" alt="tools" width="480" height="580" /></a>
+<br/>
+Now just proceed as the Arduino: Start your sketching!
+<br/>
+Note: <strong>115200 baud upload</strong> speed is a good place to start - later on you can try higher speeds but 115200 is a good safe place to start.
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<a href="../index.html"><img class="alignnone size-full wp-image-6443" src=".\image\8.jpg" alt="" width="236" height="39" /></a>                           <a href="../lesson2/index.html"><img class="alignnone size-full wp-image-6445" src=".\image\9.jpg" alt="" width="156" height="41" /></a>

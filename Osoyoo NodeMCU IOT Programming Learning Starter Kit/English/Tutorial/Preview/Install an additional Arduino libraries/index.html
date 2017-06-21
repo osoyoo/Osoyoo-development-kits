@@ -1,0 +1,88 @@
+﻿ <head>
+<title>Install Arduino Libraries</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+ 
+ <p style="text-align: left;">
+    <span style="font-size: 48px;"><img src="..\..\..\AboutThisKit\osoyoo_logo.jpg" title="" alt="osyoo logo.jpg"/></span>
+</p>
+<p align="right" class="TOC" size=="50"><b>www.osoyoo.com</b></p>
+<hr />
+<body>
+<a href="../../index.html">Back to NodeMCU Tutoial Index Page</a>
+<hr >
+<h1>Install an additional Arduino libraries</h1>
+<ul>
+ 	<li><strong><a href="#1">Instruction</a></strong></li>
+ 	<li><strong><a href="#1">What is Libraries?</a></strong></li>
+ 	<li><strong><a href="#1">How to Install a Library</a></strong></li>
+</ul>
+<h3 id="1">Instruction</h3>
+<br/>
+Once you are comfortable with the Arduino software and using the built-in functions, you may want to extend the ability of your Arduino with additional libraries.
+<h3 id="2">What are Libraries?</h3>
+Libraries are a collection of code that makes it easy for you to connect to a sensor, display, module, etc. For example, the built-in <span class="wikiword">LiquidCrystal</span> library makes it easy to talk to character LCD displays. There are hundreds of additional libraries available on the Internet for download. The built-in libraries and some of these additional libraries are <a class="wikilink" href="https://www.arduino.cc/en/Reference/Libraries">listed in the reference</a>. To use the additional libraries, you will need to install them.
+<h3 id="3">How to Install a Library</h3>
+<h4>Using the Library Manager</h4>
+To install a new library into your Arduino IDE you can use the Library Manager (available from IDE version 1.6.2). Open the IDE and click to the "Sketch" menu and then <em>Include Library &gt; Manage Libraries</em>.
+<br/>
+<div><img title="" src="./image/1.jpg" alt="" /></div>
+<br/>
+Then the library manager will open and you will find a list of libraries that are already installed or ready for installation. In this example we will install the Bridge library. Scroll the list to find it, then select the version of the library you want to install. Sometimes only one version of the library is available. If the version selection menu does not appear, don't worry: it is normal.
+<br/>
+<div><img title="" src="./image/2.jpg" alt="" /></div>
+<br/>
+Finally click on install and wait for the IDE to install the new library. Downloading may take time depending on your connection speed. Once it has finished, an <em>Installed</em> tag should appear next to the Bridge library. You can close the library manager.
+<br/>
+<div><img title="" src="./image/3.jpg" alt="" /></div>
+<br/>
+You can now find the new library available in the <em>Include Library</em> menu. If you want to add your own library open a new issue on <a class="urllink" href="https://github.com/arduino/Arduino/issues" target="_blank" rel="nofollow noopener noreferrer">github</a>.
+<h4>Importing a .zip Library</h4>
+Libraries are often distributed as a ZIP file or folder. The name of the folder is the name of the library. Inside the folder will be a .cpp file, a .h file and often a keywords.txt file, examples folder, and other files required by the library. Starting with version 1.0.5, you can install 3rd party libraries in the IDE. Do not unzip the downloaded library, leave it as is.
+
+In the Arduino IDE, navigate to <em>Sketch &gt; Include Library</em>. At the top of the drop down list, select the option to "Add .ZIP Library''.
+<br/>
+<div><img title="" src="./image/4.jpg" alt="" /></div>
+<br/>
+You will be prompted to select the library you would like to add. Navigate to the .zip file's location and open it.
+<br/>
+<div><img title="" src="./image/5.jpg" alt="" /></div>
+<br/>
+Return to the <em>Sketch &gt; Import Library</em> menu. You should now see the library at the bottom of the drop-down menu. It is ready to be used in your sketch. The zip file will have been expanded in the <em>libraries</em> folder in your Arduino sketches directory.
+
+NB: the Library will be available to use in sketches, but examples for the library will not be exposed in the <em>File &gt; Examples</em>until after the IDE has restarted.
+<h4>Manual installation</h4>
+When you want to add a library manually, you need to download it as a ZIP file, expand it and put in the proper directory. The ZIP file contains all you need, including usage examples if the author has provided them. The library manager is designed to install this ZIP file automatically as explained in the former chapter, but there are cases where you may want to perform the installation process manually and put the library in the <em>libraries</em> folder of your sketchbook by yourself.
+Arduino libraries are managed in three different places: inside the IDE installation folder, inside the core folder and in the libraries folder inside your sketchbook. The location of your sketchbook defaults to “..\\DOCUMENTS\Arduino” on Windows machines. The path is clearly shown in the Preferences panel. If you want to see where the sketchbook defaults open Preferences under File.
+<br/>
+<div><img title="" src="./image/6.jpg" alt="" /></div>
+<br/>
+Go to the directory where you have downloaded the ZIP file of the library
+<br/>
+<div><img title="" src="./image/7.jpg" alt="" /></div>
+<br/>
+Extract the ZIP file with all its folder structure in a temporary folder, then select the main folder, that should have the library name
+<br/>
+<div><img title="" src="./image/8.jpg" alt="" /></div>
+<br/>
+Copy it in the “libraries” folder inside your sketchbook.
+<br/>
+<div><img title="" src="./image/9.jpg" alt="" /></div>
+<br/>
+Start the Arduino Software (IDE), goto Sketch and the Include Library. Verify that the library you just added is available in the list, after the core libs.
+<br/>
+<div><img title="" src="./image/10.jpg" alt="" /></div>
+<br/>
+<strong>Please note</strong>: the way libraries are chosen during compilation is designed to allow the update of libraries present in the distribution. This means that placing a library in the “libraries” folder in your sketchbook overrides the other libraries versions.
+The same happens for the libraries present in additional cores installations. It is also important to note that the version of the library you put in your sketchbook may be lower than the one in the distribution or core folders, nevertheless it will be the one used during compilation. When you select a specific core for your board, the libraries present in the core’s folder are used instead of the same libraries present in the IDE distribution folder.
+Last, but not least important is the way the Arduino Software (IDE) upgrades itself: all the files in Programs/Arduino (or the folder where you installed the IDE) are deleted and a new folder is created with fresh content.
+This is why we assume that your libraries are properly put in your sketchbook folder and therefore they are not deleted during the Arduino Software (IDE) update process.
+
+<address><em>This tutorial based on text by Limor Fried.</em>
+<em>Last revision 2017/02/07 by SM</em></address><address><em>The text of the Arduino getting started guide is licensed under a <a class="urllink" href="http://creativecommons.org/licenses/by-sa/3.0/" target="_blank" rel="nofollow noopener noreferrer">Creative Commons Attribution-ShareAlike 3.0 License</a>. Code samples in the guide are released into the public domain.</em></address><address>This paper is from https://www.arduino.cc/en/Guide/Libraries,more info please click <a href="http://www.arduino.cc" target="_blank" rel="noopener noreferrer">www.arduino.cc</a></address>
+<br/>
+<br/>
+<br/>
+<br/>
+<a href="../../index.html"><img class="alignnone size-full wp-image-6443" src="./image/11.jpg" alt="" width="236" height="39" /></a>                     

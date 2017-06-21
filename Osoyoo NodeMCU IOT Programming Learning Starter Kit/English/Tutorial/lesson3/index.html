@@ -1,0 +1,89 @@
+﻿<html>
+ <head>
+<title>NodeMCU Lesson 3</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+ 
+ <p style="text-align: left;">
+    <span style="font-size: 48px;"><img src="..\..\AboutThisKit\osoyoo_logo.jpg" title="" alt="osyoo logo.jpg"/></span>
+</p>
+<p href ="www.osoyoo.com" align="right" class="TOC" size=="50"><b>www.osoyoo.com</b></p>
+<hr />
+<body>
+<a href="../index.html">Back to NodeMCU Tutoial Index Page</a>
+<hr >
+<h1>Lesson 3---Blink an LED</h1>
+<video width="920" height="720" controls>
+  <source src="..\..\videos\Lesson_3_blink_a_LED.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ul>
+<li><strong><a href="#1">Instruction</a></strong></li>
+<li><strong><a href="#2">Preparation</a></strong></li>
+<li><strong><a href="#3">Blink the on-board LED</a></strong></li>
+<li><strong><a href="#4">Blink an external LED</a></strong></li>
+</ul>
+<h3 id="1">Instruction</h3>
+<p>In this lesson,we will introduce how to blink the on-board LED and how to blink a external LED.</p>
+<h3 id="2">Preparation:</h3>
+<p><strong>Hardware</strong></p>
+<ul>
+<li><a href="http://osoyoo.com/2017/05/03/nodemcu/" target="_blank" rel="noopener noreferrer">NodeMCU</a> x 1</li>
+<li><a href="http://osoyoo.com/2017/05/05/led-pack-basic-5mm/" target="_blank" rel="noopener noreferrer">LED</a> x 1</li>
+<li><a href="http://osoyoo.com/2017/05/03/through-hole-resistors-200-ohm-5-14w-pack-of-20/" target="_blank" rel="noopener noreferrer">200 ohm resistor</a> x 1</li>
+<li><a href="http://osoyoo.com/2017/05/04/usb-cable-amicrob-0-5m/" target="_blank" rel="noopener noreferrer">Micro USB cable</a> x 1</li>
+<li>PC x 1</li>
+</ul>
+<p><strong>Software</strong></p>
+<ul>
+<li><a href="http://osoyoo.com/2017/05/08/nodemcu-lesson-1-download-and-install-arduino-ide/" target="_blank" rel="noopener noreferrer">Arduino IDE(version 1.6.4+)</a></li>
+</ul>
+<h3 id="3">Blink the on-board LED</h3>
+<p>In this part,we will learn how to use the Arduino IDE to blink the on-board LED,the blue led in the board was used to signal the execution of a particular procedure.Because the GPIO16 (DO) limitation to use the analogWrite() and looking to see my LED doing something else…</p>
+<p><a href=".\image\1.jpg"><img class="alignnone wp-image-5373" src=".\image\1.jpg" alt="EAEC400100 (4)" width="400" height="400" /></a></p>
+<p>First,connect the NodeMCU to the PC,put <a href="http://osoyoo.com/driver/Blink_on_board_LED.ino" target="_blank" rel="noopener noreferrer">below code</a> to the Arduino IDE:</p>
+<pre><span style="color: #5e6d03;">#define</span> <span style="color: #000000;">LED</span> <span style="color: #000000;">D0</span>            <span style="color: #434f54;">// Led in NodeMCU at pin GPIO16 (D0).</span>
+<span style="color: #00979c;">void</span> <span style="color: #5e6d03;">setup</span><span style="color: #000000;">(</span><span style="color: #000000;">)</span> <span style="color: #000000;">{</span>
+<span style="color: #d35400;">pinMode</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">OUTPUT</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span>    <span style="color: #434f54;">// LED pin as output.</span>
+<span style="color: #000000;">}</span>
+<span style="color: #00979c;">void</span> <span style="color: #5e6d03;">loop</span><span style="color: #000000;">(</span><span style="color: #000000;">)</span> <span style="color: #000000;">{</span>
+<span style="color: #d35400;">digitalWrite</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">HIGH</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span><span style="color: #434f54;">// turn the LED off.(Note that LOW is the voltage level but actually </span>
+                        <span style="color: #434f54;">//the LED is on; this is because it is acive low on the ESP8266.</span>
+<span style="color: #d35400;">delay</span><span style="color: #000000;">(</span><span style="color: #000000;">1000</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span>            <span style="color: #434f54;">// wait for 1 second.</span>
+<span style="color: #d35400;">digitalWrite</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">LOW</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// turn the LED on.</span>
+<span style="color: #d35400;">delay</span><span style="color: #000000;">(</span><span style="color: #000000;">1000</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// wait for 1 second.</span>
+<span style="color: #000000;">}</span>
+
+</pre>
+<p>Then config the board settings(choose the corresponding board and port for your NodeMCU) and upload the sketch to the board.</p>
+<p><a href=".\image\2.jpg"><img class="alignnone wp-image-5374" src=".\image\2.jpg" alt="onboardled settings" width="400" height="487" /></a></p>
+<p>After upload done,you will see the on-board LED blink every second.</p>
+<h3 id="4">Blink an external LED</h3>
+<p>We will show how to using the NodeMCU to blink an external LED.</p>
+<p><strong>Connection:</strong></p>
+<p>Connect one end of the resistor to the digital pin correspondent to the <em>LED_BUILTIN</em> constant. Connect the long leg of the LED (the positive leg, called the anode) to the other end of the resistor. Connect the short leg of the LED (the negative leg, called the cathode) to the GND. In the diagram below we show a NodeMCU that has D1 as the LED_BUILTIN value.</p>
+<p>The value of the resistor in series with the LED may be of a different value than 200 ohm; the LED will lit up also with values up to 1K ohm.</p>
+<p><a href=".\image\3.jpg"><img class="alignnone wp-image-5376" src=".\image\3.jpg" alt="connect" width="606" height="277" /></a></p>
+<p>Upload <a href="http://osoyoo.com/driver/Blink_an_external_LED.ino" target="_blank" rel="noopener noreferrer">below code</a> to your NodeMCU:</p>
+<pre><span style="color: #5e6d03;">#define</span> <span style="color: #000000;">LED</span> <span style="color: #000000;">D1</span> <span style="color: #434f54;">// Led in NodeMCU at pin GPIO16 (D0).</span>
+<span style="color: #00979c;">void</span> <span style="color: #5e6d03;">setup</span><span style="color: #000000;">(</span><span style="color: #000000;">)</span> <span style="color: #000000;">{</span>
+<span style="color: #d35400;">pinMode</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">OUTPUT</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// set the digital pin as output.</span>
+<span style="color: #000000;">}</span>
+<span style="color: #00979c;">void</span> <span style="color: #5e6d03;">loop</span><span style="color: #000000;">(</span><span style="color: #000000;">)</span> <span style="color: #000000;">{</span>
+<span style="color: #d35400;">digitalWrite</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">HIGH</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span><span style="color: #434f54;">// turn the LED off.(Note that LOW is the voltage level but actually</span>
+                      <span style="color: #434f54;">//the LED is on; this is because it is acive low on the ESP8266.</span>
+<span style="color: #d35400;">delay</span><span style="color: #000000;">(</span><span style="color: #000000;">1000</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span>          <span style="color: #434f54;">// wait for 1 second.</span>
+<span style="color: #d35400;">digitalWrite</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">LOW</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// turn the LED on.</span>
+<span style="color: #d35400;">delay</span><span style="color: #000000;">(</span><span style="color: #000000;">1000</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span>         <span style="color: #434f54;">// wait for 1 second.</span>
+<span style="color: #000000;">}</span>
+
+</pre>
+<p>After the upload done,you will see the led blink .</p>
+<br/>
+<br/><br/><br/>
+<br/>
+<br/>
+<br/>
+<p><a href="../lesson2/index.html"><img class="alignnone wp-image-6442 size-full" src=".\image\4.jpg" alt="" width="156" height="41" /></a>                  <a href="../index.html"><img class="alignnone wp-image-6443 size-full" src=".\image\5.jpg" alt="" width="236" height="39" /></a>                  <a href="../lesson4/index.html"><img class="alignnone size-full wp-image-6445" src=".\image\6.jpg" alt="" width="156" height="41" /></a></p>
+</html>

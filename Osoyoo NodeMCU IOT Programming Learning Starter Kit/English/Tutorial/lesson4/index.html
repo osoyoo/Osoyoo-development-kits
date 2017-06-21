@@ -1,0 +1,113 @@
+﻿<html>
+<head>
+<title>Nodemcu Lesson 4</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+ <p style="text-align: left;">
+    <span style="font-size: 48px;"><img src="..\..\AboutThisKit\osoyoo_logo.jpg" title="" alt="osyoo logo.jpg"/></span>
+</p>
+<p href ="www.osoyoo.com" align="right" class="TOC" size=="50"><b>www.osoyoo.com</b></p>
+<hr />
+<body>
+<a href="../index.html">Back to NodeMCU Tutoial Index Page</a>
+<hr >
+<h1>Lesson 4---Button Control LED</h1>
+<video width="920" height="720" controls>
+  <source src="..\..\videos\Lesson_4.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ul>
+<li><strong><a href="#1">Introduction</a></strong></li>
+<li><strong><a href="#2">Preparation</a></strong></li>
+<li><strong><a href="#3">Connection</a></strong></li>
+<li><strong><a href="#4">Upload Sketch</a></strong></li>
+<li><strong><a href="#5">Program Running Result</a></strong></li>
+<li><strong><a href="#6">The Expansion Example</a></strong></li>
+</ul>
+<h3 id="1">Introduction</h3>
+<p>In lesson 3,we have learned how to control the LED blink for every second,do you want to control the LED yourself by using a button?In this lesson,we will tell you how to realize it.When pressed the button,the LED was lighten and turn off when released.</p>
+<h3 id="2">Preparation:</h3>
+<ul>
+<li><a href="http://osoyoo.com/2017/05/03/nodemcu/" target="_blank" rel="noopener noreferrer">NodeMCU</a> x1</li>
+<li><a href="http://osoyoo.com/2017/05/07/tactile-switch-buttons-12mm-square-6mm-tall/" target="_blank" rel="noopener noreferrer">Push Button</a> x1</li>
+<li><a href="http://osoyoo.com/2017/05/05/led-pack-basic-5mm/" target="_blank" rel="noopener noreferrer">LED</a> x1</li>
+<li><a href="http://osoyoo.com/2017/05/03/through-hole-resistors-1k-ohm-5-14w-pack-of-20-2/" target="_blank" rel="noopener noreferrer">10 K ohm Resistor</a> x1</li>
+<li><a href="http://osoyoo.com/2017/05/03/through-hole-resistors-200-ohm-5-14w-pack-of-20/" target="_blank" rel="noopener noreferrer">200 ohm Resistor</a> x1</li>
+<li><a href="http://osoyoo.com/2017/05/05/breadboard-full-size/" target="_blank" rel="noopener noreferrer">Bread Board</a> x1</li>
+<li>PC x1</li>
+</ul>
+<h3 id="3">Connection:</h3>
+<p><a href=".\image\1.jpg"><img class="alignnone wp-image-5429" src=".\image\1.jpg" alt="button control led" width="755" height="386" /></a></p>
+<h3 id="4">Upload sketch</h3>
+<p>Copy below code to your Arduino IDE:</p>
+<pre><span style="color: #00979c;">int</span> <span style="color: #000000;">ledpin</span> <span style="color: #434f54;">=</span> <span style="color: #000000;">5</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// D1(gpio5)</span>
+<span style="color: #00979c;">int</span> <span style="color: #000000;">button</span> <span style="color: #434f54;">=</span> <span style="color: #000000;">4</span><span style="color: #000000;">;</span> <span style="color: #434f54;">//D2(gpio4)</span>
+<span style="color: #00979c;">int</span> <span style="color: #000000;">buttonState</span><span style="color: #434f54;">=</span><span style="color: #000000;">0</span><span style="color: #000000;">;</span>
+<span style="color: #00979c;">void</span> <span style="color: #5e6d03;">setup</span><span style="color: #000000;">(</span><span style="color: #000000;">)</span> <span style="color: #000000;">{</span>
+ <span style="color: #d35400;">pinMode</span><span style="color: #000000;">(</span><span style="color: #000000;">ledpin</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">OUTPUT</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span>
+ <span style="color: #d35400;">pinMode</span><span style="color: #000000;">(</span><span style="color: #000000;">button</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">INPUT</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span>
+<span style="color: #000000;">}</span>
+<span style="color: #00979c;">void</span> <span style="color: #5e6d03;">loop</span><span style="color: #000000;">(</span><span style="color: #000000;">)</span> <span style="color: #000000;">{</span>
+ <span style="color: #000000;">buttonState</span><span style="color: #434f54;">=</span><span style="color: #d35400;">digitalRead</span><span style="color: #000000;">(</span><span style="color: #000000;">button</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// put your main code here, to run repeatedly:</span>
+ <span style="color: #5e6d03;">if</span> <span style="color: #000000;">(</span><span style="color: #000000;">buttonState</span> <span style="color: #434f54;">==</span> <span style="color: #000000;">1</span><span style="color: #000000;">)</span>
+ <span style="color: #000000;">{</span>
+ <span style="color: #d35400;">digitalWrite</span><span style="color: #000000;">(</span><span style="color: #000000;">ledpin</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">HIGH</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> 
+ <span style="color: #d35400;">delay</span><span style="color: #000000;">(</span><span style="color: #000000;">200</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span>
+ <span style="color: #000000;">}</span>
+ <span style="color: #5e6d03;">if</span> <span style="color: #000000;">(</span><span style="color: #000000;">buttonState</span><span style="color: #434f54;">==</span><span style="color: #000000;">0</span><span style="color: #000000;">)</span>
+ <span style="color: #000000;">{</span>
+ <span style="color: #d35400;">digitalWrite</span><span style="color: #000000;">(</span><span style="color: #000000;">ledpin</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">LOW</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> 
+ <span style="color: #d35400;">delay</span><span style="color: #000000;">(</span><span style="color: #000000;">200</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span>
+ <span style="color: #000000;">}</span>
+<span style="color: #000000;">}</span>
+
+</pre>
+<p>Choose the corresponding board type and port type for your project,upload the sketch to the NodeMCU.</p>
+<h3 id="5">Program Running Result</h3>
+<p>After upload done,you will see the program running results:</p>
+<p>when the button switch is pressed, LED light up; when the switch is released, the LED goes out.</p>
+<h3 id="6">The Expansion Example:</h3>
+<p>After the routine above done, you might think, if we want to turn on the LED in this way, the hand cannot leave button, it is not convenient.How to control the lights as normal , click on the light, then press out? We can improve the program, which can realize the result that will modify the program for the following code, and then uploaded to the NodeMCU controller.</p>
+<p>The connection is same as above.</p>
+<pre><span style="color: #5e6d03;">#define</span> <span style="color: #000000;">LED</span> <span style="color: #000000;">5</span> <span style="color: #434f54;">// D1(gpio5)</span>
+<span style="color: #5e6d03;">#define</span> <span style="color: #000000;">BUTTON</span> <span style="color: #000000;">4</span> <span style="color: #434f54;">//D2(gpio4)</span>
+<span style="color: #434f54;">//Let's say you have your push button on pin 4</span>
+<span style="color: #00979c;">int</span> <span style="color: #000000;">switchState</span> <span style="color: #434f54;">=</span> <span style="color: #000000;">0</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// actual read value from pin4</span>
+<span style="color: #00979c;">int</span> <span style="color: #000000;">oldSwitchState</span> <span style="color: #434f54;">=</span> <span style="color: #000000;">0</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// last read value from pin4</span>
+<span style="color: #00979c;">int</span> <span style="color: #000000;">lightsOn</span> <span style="color: #434f54;">=</span> <span style="color: #000000;">0</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// is the switch on = 1 or off = 0</span>
+
+<span style="color: #00979c;">void</span> <span style="color: #5e6d03;">setup</span><span style="color: #000000;">(</span><span style="color: #000000;">)</span> <span style="color: #000000;">{</span> 
+ <span style="color: #d35400;">pinMode</span><span style="color: #000000;">(</span><span style="color: #000000;">BUTTON</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">INPUT</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// push button </span>
+ <span style="color: #d35400;">pinMode</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">OUTPUT</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// anything you want to control using a switch e.g. a Led</span>
+<span style="color: #000000;">}</span>
+<span style="color: #00979c;">void</span> <span style="color: #5e6d03;">loop</span><span style="color: #000000;">(</span><span style="color: #000000;">)</span> <span style="color: #000000;">{</span>
+ <span style="color: #000000;">switchState</span> <span style="color: #434f54;">=</span> <span style="color: #d35400;">digitalRead</span><span style="color: #000000;">(</span><span style="color: #000000;">BUTTON</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// read the pushButton State</span>
+ <span style="color: #5e6d03;">if</span> <span style="color: #000000;">(</span><span style="color: #000000;">switchState</span> <span style="color: #434f54;">!=</span> <span style="color: #000000;">oldSwitchState</span><span style="color: #000000;">)</span> <span style="color: #434f54;">// catch change</span>
+ <span style="color: #000000;">{</span>
+ <span style="color: #000000;">oldSwitchState</span> <span style="color: #434f54;">=</span> <span style="color: #000000;">switchState</span><span style="color: #000000;">;</span>
+ <span style="color: #5e6d03;">if</span> <span style="color: #000000;">(</span><span style="color: #000000;">switchState</span> <span style="color: #434f54;">==</span> <span style="color: #00979c;">HIGH</span><span style="color: #000000;">)</span>
+ <span style="color: #000000;">{</span>
+ <span style="color: #434f54;">// toggle</span>
+ <span style="color: #000000;">lightsOn</span> <span style="color: #434f54;">=</span> <span style="color: #434f54;">!</span><span style="color: #000000;">lightsOn</span><span style="color: #000000;">;</span>
+ <span style="color: #000000;">}</span>
+ <span style="color: #000000;">}</span>
+ <span style="color: #5e6d03;">if</span><span style="color: #000000;">(</span><span style="color: #000000;">lightsOn</span><span style="color: #000000;">)</span>
+ <span style="color: #000000;">{</span>
+ <span style="color: #d35400;">digitalWrite</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">HIGH</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// set the LED on</span>
+ <span style="color: #000000;">}</span> <span style="color: #5e6d03;">else</span> <span style="color: #000000;">{</span>
+ <span style="color: #d35400;">digitalWrite</span><span style="color: #000000;">(</span><span style="color: #000000;">LED</span><span style="color: #434f54;">,</span> <span style="color: #00979c;">LOW</span><span style="color: #000000;">)</span><span style="color: #000000;">;</span> <span style="color: #434f54;">// set the LED off</span>
+ <span style="color: #000000;">}</span>
+ <span style="color: #000000;">}</span>
+
+</pre>
+<p>After the program is compiled and uploaded, you can achieve: click the button to tturn on the LED, and then press a button, LED will be turned off.</p>
+<p> </p>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<p><a href="../lesson3/index.html"><img class="alignnone wp-image-6442 size-full" src=".\image\2.jpg" alt="" width="156" height="41" /></a>                  <a href="../index.html"><img class="alignnone wp-image-6443 size-full" src=".\image\3.jpg" alt="" width="236" height="39" /></a>                  <a href="../lesson5/index.html"><img class="alignnone size-full wp-image-6445" src=".\image\4.jpg" alt="" width="156" height="41" /></a></p>

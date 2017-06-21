@@ -1,0 +1,117 @@
+﻿<html>
+<head>
+<title>Nodemcu Lesson 10</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+ <p style="text-align: left;">
+    <span style="font-size: 48px;"><img src="..\..\AboutThisKit\osoyoo_logo.jpg" title="" alt="osyoo logo.jpg"/></span>
+</p>
+<p href ="www.osoyoo.com" align="right" class="TOC" size=="50"><b>www.osoyoo.com</b></p>
+<hr />
+<body>
+<a href="../index.html">Back to NodeMCU Tutoial Index Page</a>
+<hr >
+<h1>NodeMCU Lesson 10 — Active Buzzer & MQTT</h1>
+<video width="920" height="720" controls>
+  <source src="..\..\videos\Lesson_10.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ul>
+<li><strong><a href="#1">Introduction</a></strong></li>
+<li><strong><a href="#2">Preparation</a></strong></li>
+<li><strong><a href="#3">Connection</a></strong></li>
+<li><strong><a href="#4">Upload Sketch</a></strong></li>
+<li><strong><a href="#5">MQTT Client Settings</a></strong></li>
+<li><strong><a href="#6">Running Result</a></strong></li>
+</ul>
+<h3 id="1">Introduction</h3>
+<p>In this lesson, we will show how to use a MQTT client to remote control an active buzzer via MQTT protocol. 
+<br/>
+<a href=".\image\1.jpg"><img class="alignnone wp-image-5621" src=".\image\1.jpg" alt="" width="363" height="272" /></a></p>
+<br/>
+<h3 id="2">Preparation</h3>
+<p><strong>Hardware:</strong></p>
+<ul>
+<li><a href="http://osoyoo.com/2017/05/03/nodemcu/" target="_blank" rel="noopener noreferrer">NodeMCU board</a>  x 1</li>
+<li><a href="http://osoyoo.com/2017/05/05/buzzer-5v-breadboard-friendlytmb12a05/" target="_blank" rel="noopener noreferrer">Active Buzzer</a> x 1</li>
+<li><a href="http://osoyoo.com/2017/05/05/breadboard-full-size/" target="_blank" rel="noopener noreferrer">Breadboard</a> x 1</li>
+<li><a href="http://osoyoo.com/2017/05/22/jumper-wires-pack-for-nodemcu-kit/" target="_blank" rel="noopener noreferrer">Jumper wires</a></li>
+<li>Computer x 1</li>
+</ul>
+<p>(You can also add a series resistor to limit the buzzer current,it will decrease beep sound.)</p>
+<p><strong>Software:</strong></p>
+<ul>
+<li><a href="http://osoyoo.com/2017/05/08/nodemcu-lesson-1-download-and-install-arduino-ide/" target="_blank" rel="noopener noreferrer">Arduino IDE(version 1.6.4+)</a></li>
+<li><a href="http://osoyoo.com/2017/05/09/nodemcu-lesson-3-hello-worldconfig-the-ide-and-start-your-first-project/" target="_blank" rel="noopener noreferrer">ESP8266 Board Package and the Serial Port Driver</a></li>
+<li><a href="http://osoyoo.com/2017/05/10/nodemcu-lesson-8-mqtt-basic-example/#4" target="_blank" rel="noopener noreferrer">MQTT Client(MQTTBox here)</a></li>
+<li>Arduino library: <a href="http://osoyoo.com/2017/05/10/nodemcu-lesson-8-mqtt-basic-example/#3" target="_blank" rel="noopener noreferrer">PubSubClient</a></li>
+</ul>
+<h3 id="3">Connection</h3>
+<p>Overhere,we use D2 as the output pin to control the buzzer.</p>
+<br/>
+<p><img class="" src=".\image\2.jpg" width="417" height="588" /></p>
+<br/>
+<h3 id="4">Upload Sketch</h3>
+<p>Connect the NodeMCU to computer via USB cable,open <a href="http://www.osoyoo.com/driver/Buzzer_MQTT.ino" target="_blank" rel="noopener noreferrer">this sketch</a> by using Arduino IDE(Version1.6.4+): 
+<br/>
+<a href=".\image\3.jpg"><img class="alignnone size-full wp-image-5623" src=".\image\3.jpg" alt="" width="486" height="594" /></a></p>
+<br/>
+<strong>Edit the code to fit your own WiFi and MQTT settings as following operations:</strong>
+<br/>
+<strong>1)Hotspot Configration:</strong>
+<blockquote><span style="color: #808000;"><em>const char* ssid = "your_hotspot_ssid";</em></span>
+<br/>
+<span style="color: #808000;"><em>const char* password = "your_hotspot_password";</em></span></blockquote>
+Find above code line,put your own ssid and password on there.
+<br/>
+<strong>2)MQTT  Server  Address Setting</strong>
+<blockquote><span style="color: #808000;"><em>const char* mqtt_server = "broker.mqtt-dashboard.com";</em></span></blockquote>
+You can use your own MQTT broker URL or IP address to set above mqtt_server value. You can also use some famous free MQTT server to test the project such as <em> "broker.mqtt-dashboard.com",  "iot.eclipse.org" etc.</em>
+<br/>
+<strong>3)MQTT Client Settings</strong>
+<br/>
+If your MQTT broker require clientID,username and password authentication,you need to change
+<blockquote><span style="color: #808000;"><em>if (client.connect(clientId.c_str()))</em></span></blockquote>
+to
+<blockquote><span style="color: #808000;"><em>if (client.connect(clientId,userName,passWord)) //put your clientId/userName/passWord here</em></span></blockquote>
+If not,just keep them as default.
+<br/>
+After do that,choose the coresponding <strong>board type</strong> and <strong>port type</strong> as below,then upload the sketch to the NodeMCU.
+<ul>
+ 	<li>Board:"NodeMCU 0.9(ESP-12 Module)"</li>
+ 	<li>CPU Frequency:"80MHz"</li>
+ 	<li>Flash Size:"4M (3M SPIFFS)"</li>
+ 	<li>Upload Speed:"115200"</li>
+ 	<li>Port: Choose your own Serial Port for your NodeMCU</li>
+</ul>
+<br/>
+<p><img class="alignnone size-full wp-image-5622" src=".\image\4.jpg" alt="" width="621" height="594" /></p>
+<br/>
+<h3 id="5">MQTT Client Settings</h3>
+<p>About how to config the MQTT client,check <a href="../lesson6/index.html#6" target="_blank" rel="noopener noreferrer">this link</a>.</p>
+<p><strong>Topics Settings:</strong></p>
+<ul>
+<li><strong>Topic to publish: OsoyooCommand</strong></li>
+</ul>
+<h3 id="6">Running Result</h3>
+<p>Onece the upload done,if wifi hotspot ssid and password setting is ok and MQTT broker is connected, open the Serial Monitor,you will see following result: the NodeMCU serial port will show the IP address and the connection satatus.</p>
+<br/>
+<p><a href=".\image\5.jpg"><img class="alignnone wp-image-5625" src=".\image\5.jpg" alt="" width="518" height="325" /></a></p>
+<br/>
+<p>Next,open the MQTT client and publish "1" or "0" on the "OsoyooCommand" topic as below: 
+<br/>
+<a href=".\image\6.jpg"><img class="alignnone size-full wp-image-5626" src=".\image\6.jpg" alt="" width="435" height="716" /></a></p>
+<br/>
+<p>Then you will see the NodeMCU serial output. When you publish "1", the NodeMCU will subscribe this message and print "Command from MQTT broker is : [OsoyooCommand  Turn On Buzzer" on the serial monitor,the buzzer will beep; When you publish "0", the NodeMCU will subscribe this message and print "Command from MQTT broker is : [OsoyooCommand  Turn Off Buzzer",the buzzer will be turned off. 
+<br/>
+<a href=".\image\7.jpg"><img class="alignnone size-full wp-image-5624" src=".\image\7.jpg" alt="" width="583" height="366" /></a></p>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<h2><a href="../lesson9/index.html"><img class="alignnone wp-image-6442 size-full" src=".\image\8.jpg" alt="" width="156" height="41" /></a>                  <a href="../index.html"><img class="alignnone wp-image-6443 size-full" src=".\image\9.jpg" alt="" width="236" height="39" /></a>                  <a href="../lesson11/index.html"><img class="alignnone size-full wp-image-6445" src=".\image\10.jpg" alt="" width="156" height="41" /></a></h2>
+</html>

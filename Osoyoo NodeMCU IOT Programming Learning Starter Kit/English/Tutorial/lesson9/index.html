@@ -1,0 +1,106 @@
+﻿<html>
+<head>
+<title>Nodemcu Lesson 9</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+ <p style="text-align: left;">
+    <span style="font-size: 48px;"><img src="..\..\AboutThisKit\osoyoo_logo.jpg" title="" alt="osyoo logo.jpg"/></span>
+</p>
+<p href ="www.osoyoo.com" align="right" class="TOC" size=="50"><b>www.osoyoo.com</b></p>
+<hr />
+<body>
+<a href="../index.html">Back to NodeMCU Tutoial Index Page</a>
+<hr >
+<h1>NodeMCU Lesson 9 --- Light Sensor & MQTT</h1>
+<video width="920" height="720" controls>
+  <source src="..\..\videos\Lesson_9_Light_Sensor_&_MQTT.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<ul>
+ 	<li><strong><a href="#1">Introduction</a></strong></li>
+ 	<li><strong><a href="#2">Preparation</a></strong></li>
+ 	<li><strong><a href="#3">Connection</a></strong></li>
+ 	<li><strong><a href="#4">Upload Sketch</a></strong></li>
+ 	<li><strong><a href="#5">MQTT Client Settings</a></strong></li>
+ 	<li><strong><a href="#6">Running Result</a></strong></li>
+</ul>
+<h3 id="1">Introduction</h3>
+In this lesson, we will show how to use NodeMCU to get real-time light strength data from the light sensor , then publish these datas to a MQTT broker via MQTT protocol,so we can subscribe to these messages by MQTT client.
+<br/>
+<a href=".\image\1.jpg"><img class="alignnone wp-image-5609 " src=".\image\1.jpg" alt="" width="415" height="311" /></a>
+<h3 id="2">Preparation</h3>
+<strong>Hardware:</strong>
+<ul>
+ 	<li><a href="http://osoyoo.com/2017/05/03/nodemcu/" target="_blank" rel="noopener noreferrer">NodeMCU board</a>  x 1</li>
+ 	<li><a href="http://osoyoo.com/2017/05/05/light-sensor/" target="_blank" rel="noopener noreferrer">Light Sensor</a> x 1</li>
+ 	<li><a href="http://osoyoo.com/2017/05/05/breadboard-full-size/" target="_blank" rel="noopener noreferrer">Breadboard</a> x 1</li>
+ 	<li><a href="http://osoyoo.com/2017/05/03/through-hole-resistors-1k-ohm-5-14w-pack-of-20/" target="_blank" rel="noopener noreferrer">1k Resistor</a> x 1</li>
+ 	<li><a href="http://osoyoo.com/2017/05/22/jumper-wires-pack-for-nodemcu-kit/" target="_blank" rel="noopener noreferrer">Jumper wires</a></li>
+</ul>
+<strong>Software:</strong>
+<ul>
+ 	<li><a href="http://osoyoo.com/2017/05/08/nodemcu-lesson-1-download-and-install-arduino-ide/" target="_blank" rel="noopener noreferrer">Arduino IDE(version 1.6.4+)</a></li>
+ 	<li><a href="http://osoyoo.com/2017/05/09/nodemcu-lesson-3-hello-worldconfig-the-ide-and-start-your-first-project/" target="_blank" rel="noopener noreferrer">ESP8266 Board Package and the Serial Port Driver</a></li>
+ 	<li><a href="http://osoyoo.com/2017/05/10/nodemcu-lesson-8-mqtt-basic-example/#4" target="_blank" rel="noopener noreferrer">MQTT Client(MQTTBox here)</a></li>
+ 	<li>Arduino library: <a href="http://osoyoo.com/2017/05/10/nodemcu-lesson-8-mqtt-basic-example/#3" target="_blank" rel="noopener noreferrer">PubSubClient</a></li>
+</ul>
+<h3 id="3">Connection</h3>
+<img class="" src=".\image\2.jpg" width="584" height="527" />
+<h3 id="4">Upload Sketch</h3>
+Connect the NodeMCU to computer via USB cable,open <a href="http://www.osoyoo.com/driver/Light_sensor_MQTT.ino" target="_blank" rel="noopener noreferrer">this sketch</a> by using Arduino IDE(Version1.6.4+):
+<br/>
+<a href=".\image\3.jpg"><img class="alignnone wp-image-5610" src=".\image\3.jpg" alt="" width="451" height="476" /></a>
+<br/>
+<strong>Edit the code to fit your own WiFi and MQTT settings as following operations:</strong>
+<br/>
+<strong>1)Hotspot Configration:</strong>
+<blockquote><span style="color: #808000;"><em>const char* ssid = "your_hotspot_ssid";</em></span>
+<br/>
+<span style="color: #808000;"><em>const char* password = "your_hotspot_password";</em></span></blockquote>
+Find above code line,put your own ssid and password on there.
+<br/>
+<strong>2)MQTT  Server  Address Setting</strong>
+<blockquote><span style="color: #808000;"><em>const char* mqtt_server = "broker.mqtt-dashboard.com";</em></span></blockquote>
+You can use your own MQTT broker URL or IP address to set above mqtt_server value. You can also use some famous free MQTT server to test the project such as <em> "broker.mqtt-dashboard.com",  "iot.eclipse.org" etc.</em>
+<br/>
+<strong>3)MQTT Client Settings</strong>
+<br/>
+If your MQTT broker require clientID,username and password authentication,you need to change
+<blockquote><span style="color: #808000;"><em>if (client.connect(clientId.c_str()))</em></span></blockquote>
+to
+<blockquote><span style="color: #808000;"><em>if (client.connect(clientId,userName,passWord)) //put your clientId/userName/passWord here</em></span></blockquote>
+If not,just keep them as default.
+<br/>
+After do that,choose the coresponding <strong>board type</strong> and <strong>port type</strong> as below,then upload the sketch to the NodeMCU.
+<ul>
+ 	<li>Board:"NodeMCU 0.9(ESP-12 Module)"</li>
+ 	<li>CPU Frequency:"80MHz"</li>
+ 	<li>Flash Size:"4M (3M SPIFFS)"</li>
+ 	<li>Upload Speed:"115200"</li>
+ 	<li>Port: Choose your own Serial Port for your NodeMCU</li>
+</ul>
+<a href=".\image\4.jpg"><img class="alignnone wp-image-5611" src=".\image\4.jpg" alt="" width="421" height="448" /></a>
+<h3 id="5">MQTT Client Settings</h3>
+About how to config the MQTT client,check <a href="../lesson6/index.html#6" target="_blank" rel="noopener noreferrer">this link.</a>
+<br/>
+Topics Settings:
+<ul>
+ 	<li><strong>Topic to publish: OsoyooCommand</strong></li>
+ 	<li><strong>Topic to subscribe: OsoyooData</strong></li>
+</ul>
+<h3 id="6">Running Result</h3>
+Onece the upload done,if wifi hotspot ssid and password setting is ok, all the connections are normal, open the Serial Monitor,you will see following result:the NodeMCU serial port keep output real-time light strength data every 0.5 second,and these messages will be published to the MQTT broker via MQTT protocol,then they will be  subscribed by the MQTT client.
+<br/>
+<a href=".\image\5.jpg"><img class="alignnone wp-image-5614" src=".\image\5.jpg" alt="" width="428" height="268" /></a>
+<br/>
+At the same time,open the MQTT client, choose the subscribe topic "OsoyooData" and click "Subcribe" button, the MQTTBox will subscribe to this topic, so you will see the real-time light strength data as below:
+<br/>
+<a href=".\image\6.jpg"><img class="alignnone wp-image-5615" src=".\image\6.jpg" alt="" width="391" height="552" /></a>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<h2><a href="../lesson8/index.html"><img class="alignnone wp-image-6442 size-full" src=".\image\7.jpg" alt="" width="156" height="41" /></a>                  <a href="../index.html"><img class="alignnone wp-image-6443 size-full" src=".\image\8.jpg" alt="" width="236" height="39" /></a>                  <a href="../lesson10/index.html"><img class="alignnone size-full wp-image-6445" src=".\image\9.jpg" alt="" width="156" height="41" /></a></h2></html>

@@ -1,0 +1,107 @@
+﻿<html>
+<head>
+<title>Nodemcu Lesson 5</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel="stylesheet" href="css/style.css" type="text/css">
+</head>
+
+ <p style="text-align: left;">
+    <span style="font-size: 48px;"><img src="..\..\AboutThisKit\osoyoo_logo.jpg" title="" alt="osyoo logo.jpg"/></span>
+</p>
+<p href ="www.osoyoo.com" align="right" class="TOC" size=="50"><b>www.osoyoo.com</b></p>
+<hr />
+<body>
+<a href="../index.html">Back to NodeMCU Tutoial Index Page</a>
+<hr >
+<h1>Lesson 5---MQTT & Pubsubclient</h1>
+<ul>
+<li><strong><a href="#1">Introduction</a></strong></li>
+<li><strong><a href="#2">What is MQTT protocol?</a></strong></li>
+<li><strong><a href="#3">What is pubsubclient?</a></strong></li>
+</ul>
+<h2 id="1">Introduction</h2>
+<p>In order to make better use of nodemcu to complete more interesting IOT project,we will learn what is MQTT and what is the psbcubclient in this lesson.For those who already familiar with MQTT / Pubsubclient can skip following peragraph,for biginers read for these introduction.</p>
+<h2 id="2">What is MQTT protocol?</h2>
+<p>MQTT is a machine-to-machine (M2M)/"Internet of Things" connectivity protocol. It was designed as an extremely lightweight publish/subscribe messaging transport.In a simple language when you want to communicate to your controller through mobile or a web browser you need a communication protocol and MQTT does that magic.MQTT is a message queuing telemetry transport. It is specifically designed for automation.</p>
+<p>MQTT works on publish subscribe events. It requires MQTT broker in between. It is very vast subject. To learn more about MQTT visit <a href="http://mqtt.org/" target="_blank" rel="noopener noreferrer">MQTT.org</a>/<a href="https://github.com/mqtt/mqtt.github.io/wiki" target="_blank" rel="noopener noreferrer">MQTT Wiki</a>.</p>
+<h3>Introduction</h3>
+<ul>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/Basic-Concepts">Basic Concepts</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/Design-Principles">Design Principles</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/Example-Uses">Example Uses</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/Terms-and-acronyms">Terminology and acronyms</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/history">Background and History</a></li>
+</ul>
+<h3><a id="user-content-the-mqtt-protocol" class="anchor" href="https://github.com/mqtt/mqtt.github.io/wiki#the-mqtt-protocol"></a>The MQTT Protocol</h3>
+<ul>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/MQTT-Protocol">MQTT Protocol</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/Conventions">Conventions</a> (generally agreed, but not formalised)</li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/URI-Scheme">URI Scheme</a></li>
+</ul>
+<h3><a id="user-content-developing-applications" class="anchor" href="https://github.com/mqtt/mqtt.github.io/wiki#developing-applications"></a>Developing Applications</h3>
+<ul>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/Setup-and-testing">Setup and testing</a> with <a href="https://github.com/mqtt/mqtt.github.io/wiki/brokers">brokers</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/APIs-and-examples">APIs and examples</a> (see also the <a href="https://github.com/mqtt/mqtt.github.io/wiki/libraries">Libraries</a> page)</li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/Techniques">Techniques</a> i.e. "how do I...?"</li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/coding_bounties">Coding ideas, wanted applications, bounties, etc</a></li>
+</ul>
+<h3><a id="user-content-documentation--reference" class="anchor" href="https://github.com/mqtt/mqtt.github.io/wiki#documentation--reference"></a>Documentation & Reference</h3>
+<ul>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/questions">Questions</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/technical_articles">Technical articles</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/blog_posts">Blog post</a> and podcasts etc</li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/useful_presentations">Useful presentations</a></li>
+<li><a href="https://github.com/mqtt/mqtt.github.io/wiki/server-support">Server support</a></li>
+</ul>
+<p>Some links to articles and tutorials can be found via the legacy <a href="http://mqtt.org/documentation">Documentation</a> page. -- <em>FIXME</em> these should move into the [technical articles](technical articles) and [blog posts](blog posts) pages</p>
+<p>The legacy <a href="http://mqtt.org/faq">Frequently Asked Questions</a> page also has some useful material if you are getting started. -- <em>FIXME</em> these should be migrated into the <a href="https://github.com/mqtt/mqtt.github.io/wiki/questions">questions</a> page</p>
+<h2 id="3">What is pubsubclient?</h2>
+<p>It is a library provides a client for doing simple publish/subscribe messaging with a server that supports MQTT.</p>
+<h3><a id="user-content-limitations" class="anchor" href="https://github.com/knolleary/pubsubclient/#limitations"></a>Limitations</h3>
+<ul>
+<li>It can only publish QoS 0 messages. It can subscribe at QoS 0 or QoS 1.</li>
+<li>The maximum message size, including header, is <strong>128 bytes</strong> by default. This is configurable via <code>MQTT_MAX_PACKET_SIZE</code> in<code>PubSubClient.h</code>.</li>
+<li>The keepalive interval is set to 15 seconds by default. This is configurable via <code>MQTT_KEEPALIVE</code> in <code>PubSubClient.h</code>.</li>
+<li>The client uses MQTT 3.1.1 by default. It can be changed to use MQTT 3.1 by changing value of <code>MQTT_VERSION</code> in<code>PubSubClient.h</code>.</li>
+</ul>
+<section id="Download">
+<h3>Download</h3>
+<p>The latest version of the library can be downloaded from <a href="https://github.com/knolleary/pubsubclient/releases/latest">GitHub</a>.</p>
+</section>
+<section id="Documentation">
+<h3>Documentation</h3>
+<p>The library comes with a number of example sketches. See <code>File > Examples > PubSubClient</code> within the Arduino application.</p>
+<p>Full <a href="http://pubsubclient.knolleary.net/api.html">API Documentation</a></p>
+</section>
+<h3><a id="user-content-compatible-hardware" class="anchor" href="https://github.com/knolleary/pubsubclient/#compatible-hardware"></a>Compatible Hardware</h3>
+<p>The library uses the Arduino Ethernet Client api for interacting with the underlying network hardware. This means it Just Works with a growing number of boards and shields, including:</p>
+<ul>
+<li>Arduino Ethernet</li>
+<li>Arduino Ethernet Shield</li>
+<li>Arduino YUN – use the included <code>YunClient</code> in place of <code>EthernetClient</code>, and be sure to do a <code>Bridge.begin()</code> first</li>
+<li>Arduino WiFi Shield - if you want to send packets > 90 bytes with this shield, enable the <code>MQTT_MAX_TRANSFER_SIZE</code> define in <code>PubSubClient.h</code>.</li>
+<li>Sparkfun WiFly Shield – <a href="https://github.com/dpslwk/WiFly">library</a></li>
+<li>TI CC3000 WiFi - <a href="https://github.com/sparkfun/SFE_CC3000_Library">library</a></li>
+<li>Intel Galileo/Edison</li>
+<li>ESP8266(NodeMCU)</li>
+</ul>
+<section id="Author">
+<address><strong>Author</strong></address>
+<address>Nick O'Leary - <a href="https://twitter.com/knolleary">@knolleary</a></address>
+</section>
+<section id="License">
+<address><strong>License</strong></address>
+<address>This library is released under the <a href="http://www.opensource.org/licenses/mit-license.php">MIT License</a>.</address>
+</section>
+<address> </address>
+<address> </address>
+<section id="ChangeHistory">
+<br/>
+<br/>
+<br/><br/>
+<br/>
+<br/>
+<br/>
+<h2> <a href="../lesson4/index.html"><img class="alignnone wp-image-6442 size-full" src=".\image\1.jpg" alt="" width="156" height="41" /></a>                  <a href="../index.html"><img class="alignnone wp-image-6443 size-full" src=".\image\2.jpg" alt="" width="236" height="39" /></a>                  <a href="../lesson6/index.html"><img class="alignnone size-full wp-image-6445" src=".\image\3.jpg" alt="" width="156" height="41" /></a></h2>
+</section>
+</html>
