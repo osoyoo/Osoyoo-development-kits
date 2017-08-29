@@ -1,44 +1,41 @@
+int redLedPin = 2;   // Pin Red LED is connected to
+int count = 0;
 
-const int LED= 2; //the led pin attach to 
-String comdata = "";
-int lastLength = 0;
-
-void setup()
+void setup() 
 {
-  pinMode(LED, OUTPUT);  //initialize the LED as output
-  Serial.begin(9600);  // start serial port at 9600 bps:
-  while (! Serial);
-  Serial.println("Please input your command to control this LED:");  //print message on serial monitor
+pinMode(redLedPin, OUTPUT);   //Set led pin to output
+Serial.begin(9600); //Set serial to the 9600 band
+while (! Serial); // Allow serial to initialise 
+Serial.println("Enter Y to turn on the LED:");
 }
 
 void loop()
 {
-  //read string from serial monitor
-  if(Serial.available()>0)    // check if data has been sent from the computer
-  {  
-    comdata = "";
-    while (Serial.available() > 0)  
-    {        
-      comdata += char(Serial.read());
-      delay(2);
-    }
-    Serial.println(comdata);
+if (Serial.available())
+ {
+  char ch = Serial.read();
+  if (ch == 'y'||ch == 'Y')
+   {
+   digitalWrite(redLedPin, HIGH);
+   Serial.println("You have turned on the LED!!");
+   Serial.print("The LED was off for ");
+   Serial.print(count);
+   Serial.println(" seconds");
+   Serial.println("If you want to switch it off, simply enter N or n!");
+   count = 0;
+   }
+  if (ch == 'n'||ch == 'N')
+  {
+  digitalWrite(redLedPin, LOW);
+  Serial.println("You have turned off the LED!!");
+  Serial.print("The LED was on for ");
+  Serial.print(count);
+  Serial.println(" seconds");
+  Serial.println("If you want to switch it on, simply enter Y or y!");
+  count = 0;
   }
-    if(comdata == "on")
-    {
-      digitalWrite(LED, HIGH);//turn the led on
-    }
-    else if(comdata == "off")
-    {
-      digitalWrite(LED, LOW);//turn the led off
-    } 
-    else
-    {                         
-      digitalWrite(LED, HIGH);   // turn the LED on (HIGH is the voltage level)
-      delay(1000);                       // wait for a second
-      digitalWrite(LED, LOW);    // turn the LED off by making the voltage LOW
-      delay(1000);   
-      Serial.println("Please input correct command !");
-    }
+ }
+  delay(1000);
+  count += 1;
 }
 
