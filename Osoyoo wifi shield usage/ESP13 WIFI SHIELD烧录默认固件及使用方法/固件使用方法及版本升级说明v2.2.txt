@@ -1,0 +1,23 @@
+2015年10月19日
+1，升级SDK为esp_iot_sdk_v1.4.0
+2，版本为2.2
+3，新增ap模式可设置ip。
+4，在启动的时候，输出打印两个“\r\n”
+
+2015年9月12日
+1，将ser2net从esp_iot_sdk_v1.2.0升级到esp_iot_sdk_v1.3.0版本
+版本号：Version 2.1  
+2, 修改Check_WifiState函数，避免sta模式下，wifi端开后，tcp连接没有断开。若在ap模式下，直接连接即可
+
+固件使用方法：
+1，恢复出厂设置
+方法1，进入设置web界面，使用FactoryDefault按钮
+方法2，（nodemcu兼容开发板）长按Flash按键，超过3秒（此时LED灯快闪），恢复默认出厂设置
+2，ap和sta模式并存。
+ap模式可以设置ssid、密码、本地ip地址、子网掩码和网关地址、是否隐藏ap
+3，sta模式可以扫描ssid，连接无线路由器
+4，实现串口透传
+串口参数可设置
+网络可设置为tcp server/client、udp server/client
+当使用client模式时，支持直接使用域名作为远程地址
+接收或者发送时，LED灯闪（nodemcu兼容开发板）

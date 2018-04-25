@@ -1,0 +1,347 @@
+
+<!-- saved from url=(0019)http://192.168.4.1/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>ESP8266 Serial WiFi Shield</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=0">
+<script stype="text/javascript">
+var xmlobj=null; 
+var xmlHttp=null; 
+function CreateXMLHttpRequest()
+{
+xmlobj= window.XMLHttpRequest? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+}
+function CreateXMLHttpRequest_ap()
+{
+xmlHttp= window.XMLHttpRequest? new XMLHttpRequest() : new ActiveXObject("Microsoft.XMLHttp");
+}
+function processRequest()
+{
+if(xmlHttp.readyState == 4 && xmlHttp.status == 200){
+var res= xmlHttp.responseText;
+if(res.length>0){
+document.getElementById("sta_list").options.length=0;
+var a_list=new Array();
+a_list=res.split("^$&");
+for (i=0;i<a_list.length ;i++ ) {
+if(a_list[i].length>0){
+var t=a_list[i];
+document.getElementById("sta_list").options.add(new Option(t,t));
+}
+}
+}
+}
+}
+function doPostResp()
+{
+if(xmlobj.readyState == 4 && xmlobj.status == 200){
+var res= xmlobj.responseText;
+if(res.length>0)
+{
+alert(res);
+}
+}
+}
+function submit_post(parm)
+{
+CreateXMLHttpRequest();
+xmlobj.open("POST", "/config", true);
+xmlobj.onreadystatechange = doPostResp;
+xmlobj.send(parm);
+}
+function submit_postDefault(parm)
+{
+CreateXMLHttpRequest();
+xmlobj.open("POST", "/default", true);
+xmlobj.onreadystatechange = doPostResp;
+xmlobj.send(parm);
+}
+function getVByName(name){
+var tt = document.getElementsByName(name);
+for (var iIndex = 0; iIndex < tt.length ; iIndex++ )
+{
+if(tt[iIndex].checked)
+{
+return tt[iIndex].value;
+}
+}
+}
+function IsPortValid(str){
+var RegUrl = new RegExp();
+RegUrl.compile("^[1-9]$|(^[1-9][0-9]$)|(^[1-9][0-9][0-9]$)|(^[1-9][0-9][0-9][0-9]$)|(^[1-6][0-5][0-5][0-3][0-5]$)");
+if (!RegUrl.test(str)) {
+return false;
+}
+return true;
+}
+function submitForm() {
+var baud=document.getElementById('baud').value;
+var bits=document.getElementById('bits').value;
+var parity=document.getElementById('parity').value;
+var stop=document.getElementById('stop').value;
+var apE=document.getElementById('apE').value;
+var apH=getVByName('apH');
+var staE=getVByName('staE');
+var sockttype=getVByName('sockttype');
+var transport=getVByName('transport');
+var apN=document.getElementById('apN').value;
+var apP=document.getElementById('apP').value;
+var staN=document.getElementById('staN').value;
+var staP=document.getElementById('staP').value;
+var ip=document.getElementById('ip').value;
+var port=document.getElementById('port').value;
+var apIP=document.getElementById('apIP').value;
+var apNM=document.getElementById('apNM').value;
+var apGW=document.getElementById('apGW').value;
+if(IsPortValid(port)==false){
+alert('port is invalid');return;}
+var serial = 'baud='+baud+','+'bits='+bits+','+'parity='+parity+','+'stop='+stop+',';
+var apparm = 'apE='+apE+','+'apH='+apH+','+'apN='+apN+','+'apP='+apP+',';
+var staparm = 'staE='+staE+','+'staN='+staN+','+'staP='+staP+',';
+var netpara = 'ip='+ip+','+'port='+port+','+'sockttype='+sockttype+','+'transport='+transport+',';
+var netpara2 = 'apIP='+apIP+','+'apNM='+apNM+','+'apGW='+apGW+',';
+submit_post(serial+apparm+staparm+netpara+netpara2);
+}
+function factoryDefault()
+{
+submit_postDefault("");
+}
+function setParaRadioChecked(name,id)
+{
+var obj = document.getElementsByName(name);
+for (var i=0 ; i<=obj.length ;i++)
+{
+if (obj[i].id==id)
+{
+obj[i].checked=1;
+if(name=="staE") staEnableClicked(id);
+if(name=="sockttype") sockttypeClicked(id);
+break;
+}
+}
+}
+function setParaSelectOption(id,value)
+{
+var obj = document.getElementById(id);
+for (var i=0 ; i<=obj.length;i++)
+{
+if (obj.options[i].value==value)
+{
+obj.options[i].selected =true;
+if(id=='apE' && value==0)
+document.getElementById('apP').disabled = true;
+break;
+}
+}
+}
+function selChange()
+{
+var obj=document.getElementById('apE');
+if(obj.value==0)
+document.getElementById('apP').disabled = true;
+else
+document.getElementById('apP').disabled = false;
+}
+function staEnableClicked(mode)
+{
+if(mode=='1'){
+var obj = document.getElementById("btnRefresh");
+obj.disabled = false;
+obj = document.getElementById("sta_list");
+obj.disabled = false;
+obj = document.getElementById("staN");obj.disabled = false;obj = document.getElementById("staP");obj.disabled = false;}
+else{
+var obj = document.getElementById("btnRefresh");
+obj.disabled = true;
+obj = document.getElementById("sta_list");
+obj.disabled = true;
+obj = document.getElementById("staN");obj.disabled = true;obj = document.getElementById("staP");obj.disabled = true;}
+}
+function sockttypeClicked(mode)
+{
+if(mode==2){
+var obj = document.getElementById("label_port");
+obj.innerText = "Remote Port:";
+obj = document.getElementById("ip");
+obj.disabled = false;
+}
+else{
+var obj = document.getElementById("label_port");
+obj.innerText = "Local Port:";
+obj = document.getElementById("ip");
+obj.disabled = true;
+}
+}
+</script>
+<style>
+body{max-width:640px;width:100%;margin:0 auto;font-family: Arial,sans-serif;font-size: 15px;}
+input,select,button{font-family:inherit;font-size:inherit;}
+form{width:90%;margin: 1em auto;line-height: 2.4em;padding:5%;box-shadow: 0 0 10px rgba(0,0,0,.5);border-radius: 10px;}
+.button_group{text-align:center;margin-top: 1em;}
+.control_group label{width:45%;display: inline-block;text-align:right;padding-right: 5%;}
+.control_group input{max-width:45%;}
+button{border:none;border-radius:4px;line-height:2em;color:#fff;margin-right: 1em;}
+button.green{background:#45c01a;}
+button.gray{background:#666;}
+</style>
+</head>
+<body onload="setPara()">
+<form name="hotform" id="hotform" action="" method="post">
+<div class="button_group">
+<h2>ESP8266 Serial WiFi Shield</h2>
+</div>
+<label>Serial Setting: </label>
+<div class="control_group">
+<label>Baud :</label>
+<select id="baud" name="baud">
+<option value="300">300</option>
+<option value="600">600</option>
+<option value="1200">1200</option>
+<option value="2400">2400</option>
+<option value="4800">4800</option>
+<option value="9600">9600</option>
+<option value="19200">19200</option>
+<option value="38400">38400</option>
+<option value="57600">57600</option>
+<option value="74880">74800</option>
+<option value="115200">115200</option>
+</select>
+</div>
+<div class="control_group">
+<label>Databits:</label>
+<select id="bits" name="bits">
+<option value="0">5</option>
+<option value="1">6</option>
+<option value="2">7</option>
+<option value="3">8</option>
+</select>
+</div>
+<div class="control_group">
+<label>Parity:</label>
+<select id="parity" name="parity">
+<option value="2">NONE</option>
+<option value="1">ODD</option>
+<option value="0">EVEN</option>
+</select>
+</div>
+<div class="control_group">
+<label>Stopbits:</label>
+<select id="stop" name="stop">
+<option value="1">1</option>
+<option value="2">1.5</option>
+<option value="3">2</option>
+</select>
+</div>
+<label>Access Point(AP) : </label>
+<div class="control_group">
+<label>AP name:</label>
+<input name="apN" id="apN" type="text" maxlength="32">
+</div>
+<div class="control_group">
+<label>AP Password:</label>
+<input name="apP" id="apP" type="text" maxlength="32" disabled="">
+</div>
+<div class="control_group">
+<label>Encrypt Method:</label>
+<select id="apE" name="apE" onchange="selChange()">
+<option value="0">OPEN</option>
+<option value="1">WEP</option>
+<option value="2">WPA_PSK</option>
+<option value="3">WPA_PSK2</option>
+<option value="4">WPA_WPA2_PSK</option>
+</select>
+</div>
+<div class="control_group">
+<label>Hide AP:</label>
+<input name="apH" id="1" value="1" type="radio">Yes
+<input name="apH" id="2" value="2" type="radio">No
+</div>
+<div class="control_group">
+<label>AP IP address:</label>
+<input name="apIP" id="apIP" type="text" maxlength="16">
+</div>
+<div class="control_group">
+<label>AP Netmask:</label>
+<input name="apNM" id="apNM" type="text" maxlength="16">
+</div>
+<div class="control_group">
+<label>AP Gateway address:</label>
+<input name="apGW" id="apGW" type="text" maxlength="16">
+</div>
+<label>Station : </label>
+<div class="control_group">
+<label>Enable :</label>
+<input name="staE" id="1" value="1" onclick="staEnableClicked(&#39;1&#39;)" type="radio">Yes
+<input name="staE" id="2" value="2" onclick="staEnableClicked(&#39;2&#39;)" type="radio">No&nbsp;&nbsp;&nbsp;&nbsp;
+<button name="btnRefresh" id="btnRefresh" class="green" onclick="get_ap_list();return false;" disabled="">Refresh</button>
+</div>
+<div class="control_group">
+<label>AP Name:</label>
+<input name="staN" id="staN" type="text" maxlength="32" disabled="">
+</div>
+<div class="control_group">
+<label>AP List:</label>
+<select name="sta_list" id="sta_list" onchange="document.getElementById(&#39;staN&#39;).value=this.value;" disabled="">
+<option value="ChinaNet-enuk">ChinaNet-enuk</option><option value="newifi_B760">newifi_B760</option><option value="MERCURY_0AFE">MERCURY_0AFE</option><option value="pine">pine</option><option value="Da Vinci">Da Vinci</option><option value="wanyuwangcheng">wanyuwangcheng</option><option value="feifei">feifei</option><option value="iTV-812l">iTV-812l</option><option value="ChinaNet-YeqF">ChinaNet-YeqF</option><option value="ChinaNet-812l">ChinaNet-812l</option><option value="JINNU-SZ">JINNU-SZ</option><option value="dlink">dlink</option><option value="TP-LINK_YYL">TP-LINK_YYL</option><option value="LXG">LXG</option><option value="ChinaNet-Zj9h">ChinaNet-Zj9h</option><option value="familynet">familynet</option><option value="a-cai">a-cai</option><option value="ChinaNet-aq25">ChinaNet-aq25</option><option value="ChinaNet-thWG">ChinaNet-thWG</option><option value="acqy-tech">acqy-tech</option></select>
+</div>
+<div class="control_group">
+<label>AP Password:</label>
+<input name="staP" id="staP" type="text" maxlength="32" disabled="">
+</div>
+<label>NetWork Setting: </label>
+<div class="control_group">
+<label>Socket Type:</label>
+<input name="sockttype" id="1" value="1" checked="checked" type="radio" onclick="sockttypeClicked(1)">Server&nbsp;&nbsp;&nbsp;
+<input name="sockttype" id="2" value="2" type="radio" onclick="sockttypeClicked(2)">Client
+</div>
+<div class="control_group">
+<label>	Transport Type:</label>
+<input name="transport" id="1" value="1" checked="checked" type="radio">TCP&nbsp;&nbsp;&nbsp;&nbsp;
+<input name="transport" id="2" value="2" type="radio">UDP
+</div>
+<div class="control_group">
+<label>Remote IP:</label>
+<input name="ip" id="ip" type="text" maxlength="64" disabled="">
+</div>
+<div class="control_group">
+<label id="label_port">Local Port:</label>
+<input name="port" id="port" type="text" onkeyup="value=value.replace(/\D/g,&#39;&#39;)" onafterpaste="value=value.replace(/\D/g,&#39;&#39;)">
+</div>
+<div class="button_group">
+<button class="green" onclick="submitForm();return false;">Submit</button>
+<button class="gray" onclick="factoryDefault();return false;">FactoryDefault</button>
+</div>
+<div class="button_group">
+<font color="blue"><label>Version 2.2 based on ESP8266 SDK 1.4.0</label><br>
+<label>©Copyright 2015 <a href="http://www.doit.am/">www.doit.am </a></label></font>
+</div>
+</form>
+<script stype="text/javascript">function setPara(){
+setParaRadioChecked('apH',2);
+setParaRadioChecked('staE',2);
+setParaRadioChecked('sockttype',1);
+setParaRadioChecked('transport',1);
+document.getElementById('apN').value='DoitWiFi_Config';
+document.getElementById('apP').value='12345678';
+document.getElementById('staN').value='Doit';
+document.getElementById('staP').value='123456789';
+document.getElementById('ip').value='192.168.1.100';
+document.getElementById('port').value='9000';
+setParaSelectOption('apE',0);
+setParaSelectOption('baud',9600);
+setParaSelectOption('bits',3);
+setParaSelectOption('parity',2);
+setParaSelectOption('stop',1);
+document.getElementById('apIP').value='192.168.4.1';
+document.getElementById('apNM').value='255.255.255.0';
+document.getElementById('apGW').value='192.168.4.1';
+}
+function get_ap_list()
+{
+var url = "/ap_list.do?i=0" ;
+CreateXMLHttpRequest_ap()
+xmlHttp.onreadystatechange = processRequest;
+xmlHttp.open("GET", url, true);
+xmlHttp.send( null );
+}
+get_ap_list();
+</script>
+</body></html>
