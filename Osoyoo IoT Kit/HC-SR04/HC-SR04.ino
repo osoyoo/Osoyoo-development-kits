@@ -2,17 +2,17 @@
  HC-SR04 Ping distance sensor:
  VCC to arduino 5v 
  GND to arduino GND
- Echo to Arduino pin 2 
- Trig to Arduino pin 3
+ Echo to Arduino pin 7 
+ Trig to Arduino pin 8
 */
 
 #define CAYENNE_PRINT Serial  // Comment this out to disable prints and save space
 #include <CayenneMQTTEthernet.h>
 
 // Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
-char username[] = "c4cb3ce0-4029-11e7-98bd-9ffdab1de3b9";
-char password[] = "086740b8d0b9882b1191342fa0984c795cba7ca7";
-char clientID[] = "a51c3620-4ea5-11e8-aaba-83a3e9c1fc99";
+char username[] = "put your username here ";
+char password[] = "put your password here";
+char clientID[] = "put your clientID here";
 
 #define VIRTUAL_CHANNEL 11
 #define echoPin 7
