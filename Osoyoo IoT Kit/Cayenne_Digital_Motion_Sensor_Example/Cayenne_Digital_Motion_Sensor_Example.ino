@@ -27,9 +27,9 @@ Steps:
 #include <CayenneMQTTEthernet.h>
 
 // Cayenne authentication info. This should be obtained from the Cayenne Dashboard.
-char username[] = "c4cb3ce0-4029-11e7-98bd-9ffdab1de3b9";
-char password[] = "086740b8d0b9882b1191342fa0984c795cba7ca7";
-char clientID[] = "a51c3620-4ea5-11e8-aaba-83a3e9c1fc99";
+char username[] = "put your username here ";
+char password[] = "put your password here";
+char clientID[] = "put your clientID here";
 
 // Virtual Pin of the Digital Motion Sensor widget.
 #define VIRTUAL_CHANNEL 14
