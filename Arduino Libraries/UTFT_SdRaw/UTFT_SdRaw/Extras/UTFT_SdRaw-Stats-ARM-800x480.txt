@@ -1,0 +1,57 @@
+SdFat - (Version - 11th Nov 2014)
+
+Initialising SD card...
+Card initialised.
+Initialising LCD.
+LCD initialised.
+Initialising GPS.
+Time to draw 240x240 raw 192 ms
+Skip button detected (No GPS :( )
+Time to draw 440x440 raw (no extra buffer) (non inverted colour) 649 ms
+Time to draw 440x440 raw (32*buffer) (non inverted colour) 453 ms
+Time to draw 440x440 raw (32*buffer) (inverted colour) 453 ms
+Time to draw 440x440 portion from 4040x4040 raw image (inverted colour) 829 ms
+time to draw 210 42x42 icons (ms) 4814
+Thanks for watching!
+Initialising SD card...
+Card initialised.
+Initialising LCD.
+LCD initialised.
+Initialising GPS.
+Time to draw 240x240 raw 192 ms
+Skip button detected (No GPS :( )
+Time to draw 440x440 raw (no extra buffer) (non inverted colour) 649 ms
+Time to draw 440x440 raw (32*buffer) (non inverted colour) 453 ms
+Time to draw 440x440 raw (32*buffer) (inverted colour) 453 ms
+Time to draw 440x440 portion from 4040x4040 raw image (inverted colour) 829 ms
+time to draw 210 42x42 icons (ms) 4815
+Thanks for watching!
+
+SdFat - (Version - 24th Mar 2015)
+
+Initialising SD card...
+Card initialised.
+Initialising LCD.
+LCD initialised.
+Initialising GPS.
+Time to draw 240x240 raw 184 ms
+Skip button detected (No GPS :( )
+Time to draw 440x440 raw (no extra buffer) (non inverted colour) 617 ms
+Time to draw 440x440 raw (32*buffer) (non inverted colour) 422 ms
+Time to draw 440x440 raw (32*buffer) (inverted colour) 423 ms
+Time to draw 440x440 portion from 4040x4040 raw image (inverted colour) 800 ms
+time to draw 210 42x42 icons (ms) 4769
+Thanks for watching!
+Initialising SD card...
+Card initialised.
+Initialising LCD.
+LCD initialised.
+Initialising GPS.
+Time to draw 240x240 raw 184 ms
+Skip button detected (No GPS :( )
+Time to draw 440x440 raw (no extra buffer) (non inverted colour) 617 ms
+Time to draw 440x440 raw (32*buffer) (non inverted colour) 422 ms
+Time to draw 440x440 raw (32*buffer) (inverted colour) 423 ms
+Time to draw 440x440 portion from 4040x4040 raw image (inverted colour) 800 ms
+time to draw 210 42x42 icons (ms) 4769
+Thanks for watching!

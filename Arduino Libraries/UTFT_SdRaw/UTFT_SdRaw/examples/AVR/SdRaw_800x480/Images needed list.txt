@@ -1,0 +1,4 @@
+wait4gps.RAW
+SO11/SO100100.RAW.RAW
+SK45/SK45.RAW
+icons.raw
