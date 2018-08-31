@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303f9f</color>
+    <color name="colorAccent">#07aff5</color>
+    <color name="colorBackground">#d5d7d8</color>
+    <color name="primaryTextNormal">#ffffff</color>
+    <color name="primaryTextDisabled">#3ab0b0b0</color><!-- alpha 0.26 -->
+</resources>

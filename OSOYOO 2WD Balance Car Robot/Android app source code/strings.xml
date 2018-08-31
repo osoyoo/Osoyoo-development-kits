@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">张三</string>
+    <string name="open">打开</string>
+    <string name="close">关闭</string>
+    <string name="bluetooth">蓝牙</string>
+    <string name="disconnect">断开</string>
+    <string name="connect">连接</string>
+    <string name="search">搜索</string>
+    <string name="menu_main">主控界面</string>
+    <string name="menu_debug">PDI调试</string>
+    <string name="menu_about">关于我们</string>
+    <string name="message_01">未发现蓝牙设备</string>
+    <string name="message_02">蓝牙已开启</string>
+    <string name="message_03">蓝牙已关闭</string>
+    <string name="message_04">蓝牙设备未开启</string>
+    <string name="message_05">请先搜索设备</string>
+    <string name="message_06">没有搜索到设备</string>
+    <string name="message_07">请打开蓝牙并重新运行程序</string>
+    <string name="message_08">搜索到蓝牙设备</string>
+    <string name="message_09">连接成功建立，可以开始操控了</string>
+    <string name="message_10">连接失败</string>
+</resources>

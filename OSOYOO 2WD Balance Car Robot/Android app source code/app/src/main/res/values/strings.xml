@@ -1,0 +1,35 @@
+<resources>
+    <string name="app_name">Balance Car</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
+    <string name="bluetooth">Bluetooth</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="connect">Connect</string>
+    <string name="search">Search</string>
+    <string name="menu_main">Main interface</string>
+    <string name="menu_debug">PID debug</string>
+    <string name="menu_about">About us</string>
+    <string name="message_01">No bluetooth device was found</string>
+    <string name="message_02">Bluetooth on</string>
+    <string name="message_03">Bluetooth off</string>
+    <string name="message_04">Bluetooth device is not enabled</string>
+    <string name="message_05">Please search the device</string>
+    <string name="message_06">No device was found</string>
+    <string name="message_07">Please turn on bluetooth and restart app</string>
+    <string name="message_08">Found bluetooth device</string>
+    <string name="message_09">Connect successful</string>
+    <string name="message_10">Connect fail </string>
+    <string name="pid_angle">Angle parameter</string>
+    <string name="pid_speed">Speed parameter</string>
+    <string name="update_angle">Update angle parameter PID</string>
+    <string name="update_speed">Update speed parameter PID</string>
+    <string name="query_pid">Inquire about PID</string>
+    <string name="reset_pid">Restore the default</string>
+    <string name="seek_update">Drag the update</string>
+    <string name="left_motor">Left motor speed:</string>
+    <string name="right_motor">Right motor speed:</string>
+    <string name="about_title">Welcome to www.osoyoo.com</string>
+    <string name="about_info_01">Osoyoo® trademark is owned by Pinetree Electronics Ltd which provides an open-source electronics platform based on easy-to-use hardware and software.</string>
+    <string name="about_info_02">We provide low-cost, high-performance products and tutorials that people use to learn, solve problems and have fun. We\'re committed to creating solid products backed by friendly, responsive service to delight our loyal customers around the world.</string>
+    <string name="about_info_03">Customer Service Contacts: support@osoyoo.info</string>
+</resources>

@@ -1,0 +1,446 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="64dp"
+        android:layout_height="match_parent"
+        android:layout_gravity="end"
+        android:background="#ffffff"
+        android:orientation="vertical">
+
+        <FrameLayout
+            android:id="@+id/main"
+            style="@style/MenuItem">
+
+            <TextView
+                style="@style/MenuItemText"
+                android:drawableTop="@drawable/btn_menu_main"
+                android:text="@string/menu_main" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/debug"
+            style="@style/MenuItem">
+
+            <TextView
+                style="@style/MenuItemText"
+                android:drawableTop="@drawable/btn_menu_debug"
+                android:text="@string/menu_debug" />
+        </FrameLayout>
+
+        <FrameLayout
+            android:id="@+id/about"
+            style="@style/MenuItem">
+
+            <TextView
+                style="@style/MenuItemText"
+                android:drawableTop="@drawable/btn_menu_about"
+                android:text="@string/menu_about" />
+        </FrameLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:layout_marginEnd="64dp"
+        android:orientation="vertical">
+
+        <RelativeLayout style="@style/ActionBar">
+
+            <Switch
+                android:id="@+id/bluetooth"
+                style="@style/ActionSwitch"
+                android:layout_alignParentStart="true"
+                android:text="@string/bluetooth" />
+
+            <Button
+                android:id="@+id/search"
+                style="@style/ActionButton"
+                android:layout_toEndOf="@id/bluetooth"
+                android:text="@string/search" />
+
+            <Button
+                android:id="@+id/connect"
+                style="@style/ActionButton"
+                android:layout_alignParentEnd="true"
+                android:text="@string/connect" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/search"
+                android:layout_toStartOf="@id/connect">
+
+                <TextView
+                    android:id="@+id/device"
+                    style="@style/ActionSpinner" />
+            </FrameLayout>
+        </RelativeLayout>
+
+        <FrameLayout
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#00162f">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:alpha="0.6"
+                android:scaleType="centerInside"
+                android:src="@mipmap/bg_main" />
+
+            <RelativeLayout
+                android:id="@+id/mainContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <com.bluetooth.admin.balencecar.DirectionPadView
+                    android:id="@+id/directionPad"
+                    android:layout_width="234dp"
+                    android:layout_height="234dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentStart="true"
+                    android:layout_marginBottom="24dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginStart="24dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_marginBottom="32dp"
+                    android:layout_marginEnd="32dp"
+                    android:layout_toEndOf="@id/directionPad"
+                    android:gravity="end"
+                    android:orientation="horizontal">
+
+                    <com.bluetooth.admin.balencecar.KeyButton
+                        android:id="@+id/levo"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:background="@drawable/btn_levo" />
+
+                    <com.bluetooth.admin.balencecar.KeyButton
+                        android:id="@+id/dextro"
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:layout_marginStart="40dp"
+                        android:background="@drawable/btn_dextro" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentTop="true"
+                    android:layout_marginEnd="28dp"
+                    android:layout_marginTop="16dp"
+                    android:gravity="end"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/MotorLabel"
+                            android:text="@string/left_motor" />
+
+                        <TextView
+                            android:id="@+id/leftMotor"
+                            style="@style/MotorLabel"
+                            android:background="@drawable/ic_round_normal"
+                            android:text="0.00" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            style="@style/MotorLabel"
+                            android:text="@string/right_motor" />
+
+                        <TextView
+                            android:id="@+id/rightMotor"
+                            style="@style/MotorLabel"
+                            android:background="@drawable/ic_round_normal"
+                            android:text="0.00" />
+                    </LinearLayout>
+                </LinearLayout>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:id="@+id/debugContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:orientation="vertical"
+                android:paddingEnd="16dp"
+                android:paddingStart="16dp"
+                android:paddingTop="24dp"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="24dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/PIDTitle"
+                            android:text="@string/pid_angle" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/minusAP"
+                                style="@style/PIDMinus" />
+
+                            <FrameLayout style="@style/PIDContent">
+
+                                <TextView
+                                    android:id="@+id/textAP"
+                                    style="@style/PIDLabel" />
+
+                                <SeekBar
+                                    android:id="@+id/seekAP"
+                                    style="@style/PIDSeekBar" />
+                            </FrameLayout>
+
+                            <Button
+                                android:id="@+id/plusAP"
+                                style="@style/PIDPlus" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/minusAD"
+                                style="@style/PIDMinus" />
+
+                            <FrameLayout style="@style/PIDContent">
+
+                                <TextView
+                                    android:id="@+id/textAD"
+                                    style="@style/PIDLabel" />
+
+                                <SeekBar
+                                    android:id="@+id/seekAD"
+                                    style="@style/PIDSeekBar" />
+                            </FrameLayout>
+
+                            <Button
+                                android:id="@+id/plusAD"
+                                style="@style/PIDPlus" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/updateAngle"
+                            style="@style/PIDRoundButtun"
+                            android:text="@string/update_angle" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="8dp"
+                        android:layout_marginStart="24dp"
+                        android:layout_weight="1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            style="@style/PIDTitle"
+                            android:text="@string/pid_speed" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/minusVP"
+                                style="@style/PIDMinus" />
+
+                            <FrameLayout style="@style/PIDContent">
+
+                                <TextView
+                                    android:id="@+id/textVP"
+                                    style="@style/PIDLabel" />
+
+                                <SeekBar
+                                    android:id="@+id/seekVP"
+                                    style="@style/PIDSeekBar" />
+                            </FrameLayout>
+
+                            <Button
+                                android:id="@+id/plusVP"
+                                style="@style/PIDPlus" />
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+
+                            <Button
+                                android:id="@+id/minusVI"
+                                style="@style/PIDMinus" />
+
+                            <FrameLayout style="@style/PIDContent">
+
+                                <TextView
+                                    android:id="@+id/textVI"
+                                    style="@style/PIDLabel" />
+
+                                <SeekBar
+                                    android:id="@+id/seekVI"
+                                    style="@style/PIDSeekBar" />
+                            </FrameLayout>
+
+                            <Button
+                                android:id="@+id/plusVI"
+                                style="@style/PIDPlus" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/updateSpeed"
+                            style="@style/PIDRoundButtun"
+                            android:text="@string/update_speed" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:orientation="horizontal"
+                    android:paddingTop="14dp">
+
+                    <Button
+                        android:id="@+id/queryPID"
+                        style="@style/PIDRoundButtun"
+                        android:text="@string/query_pid" />
+
+                    <Button
+                        android:id="@+id/resetPID"
+                        style="@style/PIDRoundButtun"
+                        android:layout_marginEnd="20dp"
+                        android:layout_marginStart="20dp"
+                        android:text="@string/reset_pid" />
+
+                    <CheckBox
+                        android:id="@+id/autoUpdatePID"
+                        style="@style/PIDCheckBox"
+                        android:text="@string/seek_update" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/aboutContent"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:clickable="true"
+                android:focusable="true"
+                android:visibility="gone">
+
+                <LinearLayout
+                    android:id="@+id/aTitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="16dp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="66dp"
+                        android:scaleType="centerInside"
+                        android:src="@mipmap/ic_about_logo" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/about_title"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/aText"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignStart="@id/aTitle"
+                    android:layout_below="@id/aTitle"
+                    android:orientation="vertical"
+                    android:paddingEnd="8dp"
+                    android:paddingStart="136dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:textColor="#ffffff"
+                        android:text="@string/about_info_01"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="4dp"
+                        android:text="@string/about_info_02"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:layout_marginTop="4dp"
+                        android:autoLink="email"
+                        android:text="@string/about_info_03"
+                        android:textColor="#ffffff"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_alignTop="@id/aText"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_toEndOf="@id/aText"
+                    android:scaleType="centerInside"
+                    android:src="@mipmap/ic_about_qrcode" />
+            </RelativeLayout>
+        </FrameLayout>
+    </LinearLayout>
+</merge>
