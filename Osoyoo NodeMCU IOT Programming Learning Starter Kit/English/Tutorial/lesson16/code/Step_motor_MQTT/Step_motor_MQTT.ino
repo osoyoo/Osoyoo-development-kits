@@ -11,10 +11,14 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 #include <Stepper.h>
-// Update these with values suitable for your network.
+// Update these with values suitable for your wifi network.
 const char* ssid = "*****";//put your wifi ssid here
 const char* password = "*******";//put your wifi password here
- const char* mqtt_server = "broker.mqttdashboard.com";
+
+// Update these values for your MQTT server
+const char* mqtt_server = "broker.mqttdashboard.com";
+const char* mqttUser = "username"; 
+const char* mqttPwd = "password"; 
 //const char* mqtt_server = "iot.eclipse.org";
 
 const int stepsPerRevolution = 200;  // change this to fit the number of steps per revolution
@@ -74,7 +78,7 @@ void reconnect() {
     clientId += String(random(0xffff), HEX);
     // Attempt to connect
     //if you MQTT broker has clientID,username and password
-    //please change following line to    if (client.connect(clientId,userName,passWord))
+    //please change following line to    if (client.connect(clientId.c_str(),mqttUser,mqttPwd))
     if (client.connect(clientId.c_str()))
     {
       Serial.println("connected");
